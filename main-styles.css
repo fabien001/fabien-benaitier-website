@@ -8,6 +8,16 @@
 
 
 
+/* ↓ --------- General --------- ↓ */
+body {
+	padding:0;
+	margin:0;
+}
+/* ↑ --------- General --------- ↑ */
+
+
+
+
 
 
 
@@ -20,7 +30,45 @@
 	flex-wrap:nowrap;
 	justify-content:flex-start;
 	align-items:baseline;
-	row-gap:;
+
+	position:absolute;
+	width:100%;
+	overflow:auto;
+
+	padding:0;
+	margin:0;
+	left:0;
+	top:0;
+
+	border-bottom:1px solid var(--color-primary);
+
+	-ms-overflow-style: none;
+  	scrollbar-width: none;
+}
+.menu::-webkit-scrollbar {
+	display:none;
+}
+.menu::after, .menu::before {
+	content:"";
+}
+
+.menu li {
+	text-decoration:none;
+	list-style:none;
+}
+
+/*Mobile*/
+@media only screen and (max-width: 600px) {
+	.menu {
+		column-gap:var(--size-xm);
+	}
+}
+
+/*Desktop*/
+@media only screen and (min-width: 600px) {
+	.menu {
+		column-gap:var(--size-m);
+	}
 }
 
 /* ↑ --------- Top menus --------- ↑ */

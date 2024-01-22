@@ -90,23 +90,23 @@
 /*Desktop*/
 @media only screen and (min-width: 600px) {
 	:root {
-		--font-size-tera: 10.5rem; /*96px*/
-		--font-size-giga: 9.625rem; /*88px*/
-		--font-size-mega: 7.875rem; /*72px*/
-		--font-size-kilo: 7rem; /*64px*/
-		--font-size-deci: 3.5rem; /*32px*/
-		--font-size-centi: 2.625rem; /*24px*/
-		--font-size-mili: 1.75rem; /*16px*/
+		--font-size-tera: 9rem;
+		--font-size-giga: 8.25rem;
+		--font-size-mega: 6.75rem;
+		--font-size-kilo: 6rem;
+		--font-size-deci: 3rem;
+		--font-size-centi: 2.25rem;
+		--font-size-mili: 1.5rem;
 
 
 		/* line-height = 1.75*font-size */
-		--line-height-tera: 18.375rem;
-		--line-height-giga: 16.84375rem;
-		--line-height-mega: 13.78125rem;
-		--line-height-kilo: 12.25rem;
-		--line-height-deci: 6.125rem;
-		--line-height-centi: 4.59375rem;
-		--line-height-mili: 3.0625rem;
+		--line-height-tera: 15.75rem;
+		--line-height-giga: 14.4375rem;
+		--line-height-mega: 11.8125rem;
+		--line-height-kilo: 10.5rem;
+		--line-height-deci: 5.25rem;
+		--line-height-centi: 3.9375rem;
+		--line-height-mili: 2.625rem;
 	}
 }
 /* ↑ --------- Text sizes --------- ↑ */
