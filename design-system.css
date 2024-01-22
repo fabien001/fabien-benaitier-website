@@ -1,0 +1,202 @@
+/* -------------------- Design system styles -------------------- */
+
+
+
+
+/* ↓ --------- Font --------- ↓ */
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900');
+/* ↑ --------- Font --------- ↑ */
+
+
+
+/* ↓ --------- Colors --------- ↓ */
+:root {
+	--color-primary: #2B2B2B;
+	--color-secondary: #808080;
+	--color-contrast-1: #E6E6E6;
+	--color-contrast-2: #FFFFFF;
+	--color-highlight: #2AE58D;
+	--color-highlight-strong: #18B168;
+}
+
+.dot-pattern {
+	background-image:url("assets/dot-pattern.png");
+	background-repeat:repeat;
+	background-blend-mode: lighten;
+	background-color:rgba(255, 255, 255, 0.9);
+}
+
+.highlight-transp {
+	background-color: rgba(42, 229, 141, 0.2);
+	backdrop-filter: blur(5px);
+}
+/* ↑ --------- Colors --------- ↑ */
+
+
+
+/*---*/
+
+
+
+
+/* ↓ --------- Mobile --------- ↓ */
+@media only screen and (max-width: 600px) {
+
+
+	/* ↓ --------- Mobile text sizes --------- ↓ */
+	:root {
+		--font-size-tera: 6rem; /*96px*/
+		--font-size-giga: 5.5rem; /*88px*/
+		--font-size-mega: 4.5rem; /*72px*/
+		--font-size-kilo: 4rem; /*64px*/
+		--font-size-deci: 2rem; /*32px*/
+		--font-size-centi: 1.5rem; /*24px*/
+		--font-size-mili: 1rem; /*16px*/
+
+
+		/* line-height = 1.75*font-size */
+		--line-height-tera: 10.5rem;
+		--line-height-giga: 9.625rem;
+		--line-height-mega: 7.875rem;
+		--line-height-kilo: 7rem;
+		--line-height-deci: 3.5rem;
+		--line-height-centi: 2.625rem;
+		--line-height-mili: 1.75rem;
+	}
+	/* ↑ --------- Mobile text sizes --------- ↑ */
+}
+/* ↑ --------- Mobile --------- ↑ */
+
+
+
+/*---*/
+
+
+
+/* ↓ --------- Desktop --------- ↓ */
+@media only screen and (min-width: 600px) {
+
+	/* ↓ --------- Desktop text sizes --------- ↓ */
+	:root {
+		--font-size-tera: 10.5rem; /*96px*/
+		--font-size-giga: 9.625rem; /*88px*/
+		--font-size-mega: 7.875rem; /*72px*/
+		--font-size-kilo: 7rem; /*64px*/
+		--font-size-deci: 3.5rem; /*32px*/
+		--font-size-centi: 2.625rem; /*24px*/
+		--font-size-mili: 1.75rem; /*16px*/
+
+
+		/* line-height = 1.75*font-size */
+		--line-height-tera: 18.375rem;
+		--line-height-giga: 16.84375rem;
+		--line-height-mega: 13.78125rem;
+		--line-height-kilo: 12.25rem;
+		--line-height-deci: 6.125rem;
+		--line-height-centi: 4.59375rem;
+		--line-height-mili: 3.0625rem;
+	}
+	/* ↑ --------- Desktop text sizes --------- ↑ */
+}
+/* ↑ --------- Desktop --------- ↑ */
+
+
+
+/*---*/
+
+
+
+/* ↓ --------- Text classes --------- ↓ */
+.text {
+	font-family: "League Spartan", sans-serif;
+	font-optical-sizing: auto;
+	color: var(--color-primary);
+	margin:0;
+	max-width:100vw;
+	transition: font-variation-settings .5s ease-in-out;
+}
+
+.text.tera {
+	font-size: var(--font-size-tera);
+	line-height:var(--line-height-tera);
+	font-variation-settings: "wght" 100;
+}
+.text.tera.highlight {
+	font-variation-settings: "wght" 900;
+}
+
+
+.text.giga {
+	font-size: var(--font-size-giga);
+	line-height:var(--line-height-giga);
+	font-variation-settings: "wght" 100;
+}
+.text.giga.highlight {
+	font-variation-settings: "wght" 900;
+}
+
+
+.text.mega {
+	font-size: var(--font-size-mega);
+	line-height:var(--line-height-mega);
+	font-variation-settings: "wght" 150;
+}
+.text.mega.highlight {
+	font-variation-settings: "wght" 850;
+}
+
+
+.text.kilo {
+	font-size: var(--font-size-kilo);
+	line-height:var(--line-height-kilo);
+	font-variation-settings: "wght" 150;
+}
+.text.kilo.highlight {
+	font-variation-settings: "wght" 850;
+}
+
+
+.text.deci {
+	font-size: var(--font-size-deci);
+	line-height:var(--line-height-deci);
+	font-variation-settings: "wght" 150;
+}
+.text.deci.highlight {
+	font-variation-settings: "wght" 850;
+}
+
+
+.text.centi {
+	font-size: var(--font-size-centi);
+	line-height:var(--line-height-centi);
+	font-variation-settings: "wght" 200;
+}
+.text.centi.highlight {
+	font-variation-settings: "wght" 800;
+}
+
+
+/*Mobile*/
+@media only screen and (max-width: 600px) {
+	.text.mili {
+		font-size: var(--font-size-mili);
+		line-height:var(--line-height-mili);
+		font-variation-settings: "wght" 250;
+	}
+	.text.mili.highlight {
+		font-variation-settings: "wght" 800;
+	}
+}
+
+/*Desktop*/
+@media only screen and (min-width: 600px) {
+	.text.mili {
+		font-size: var(--font-size-mili);
+		line-height:var(--line-height-mili);
+		font-variation-settings: "wght" 150;
+	}
+	.text.mili.highlight {
+		font-variation-settings: "wght" 800;
+	}
+}
+/* ↑ --------- Text classes --------- ↑ */
