@@ -34,16 +34,37 @@
 
 
 
+
 /*---*/
 
 
 
 
-/* ↓ --------- Mobile --------- ↓ */
+/* ↓ --------- Sizings --------- ↓ */
+:root {
+	--size-base: 0.25rem; /*4px*/
+	--size-double: 0.5rem; /*8px*/
+	--size-xs: 1rem; /*16px*/
+	--size-s: 1.5rem; /*24px*/
+	--size-xm: 2rem; /*32px*/
+	--size-m: 2.5rem; /*40px*/
+	--size-l: 4.5rem; /*72px*/
+	--size-xl: 6.5rem; /*104px*/
+	--size-2xl: 9rem; /*144px*/
+}
+/* ↑ --------- Sizings --------- ↑ */
+
+
+
+
+/*---*/
+
+
+
+
+/* ↓ --------- Text sizes --------- ↓ */
+/*Mobile*/
 @media only screen and (max-width: 600px) {
-
-
-	/* ↓ --------- Mobile text sizes --------- ↓ */
 	:root {
 		--font-size-tera: 6rem; /*96px*/
 		--font-size-giga: 5.5rem; /*88px*/
@@ -63,20 +84,11 @@
 		--line-height-centi: 2.625rem;
 		--line-height-mili: 1.75rem;
 	}
-	/* ↑ --------- Mobile text sizes --------- ↑ */
 }
-/* ↑ --------- Mobile --------- ↑ */
 
 
-
-/*---*/
-
-
-
-/* ↓ --------- Desktop --------- ↓ */
+/*Desktop*/
 @media only screen and (min-width: 600px) {
-
-	/* ↓ --------- Desktop text sizes --------- ↓ */
 	:root {
 		--font-size-tera: 10.5rem; /*96px*/
 		--font-size-giga: 9.625rem; /*88px*/
@@ -96,9 +108,8 @@
 		--line-height-centi: 4.59375rem;
 		--line-height-mili: 3.0625rem;
 	}
-	/* ↑ --------- Desktop text sizes --------- ↑ */
 }
-/* ↑ --------- Desktop --------- ↑ */
+/* ↑ --------- Text sizes --------- ↑ */
 
 
 
