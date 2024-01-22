@@ -12,6 +12,7 @@
 body {
 	padding:0;
 	margin:0;
+	overflow:hidden;
 }
 /* ↑ --------- General --------- ↑ */
 
@@ -41,12 +42,6 @@ body {
 	top:0;
 
 	border-bottom:1px solid var(--color-primary);
-
-	-ms-overflow-style: none;
-  	scrollbar-width: none;
-}
-.menu::-webkit-scrollbar {
-	display:none;
 }
 .menu::after, .menu::before {
 	content:"";
@@ -61,6 +56,14 @@ body {
 @media only screen and (max-width: 600px) {
 	.menu {
 		column-gap:var(--size-xm);
+		overflow:auto;
+	}
+	.menu::-webkit-scrollbar {
+		display:none;
+	}
+	.menu {
+	  -ms-overflow-style: none;  /* IE and Edge */
+	  scrollbar-width: none;  /* Firefox */
 	}
 }
 
@@ -68,6 +71,14 @@ body {
 @media only screen and (min-width: 600px) {
 	.menu {
 		column-gap:var(--size-m);
+		overflow:hidden;
+	}
+	.menu::-webkit-scrollbar {
+		display:visible;
+	}
+	.menu {
+	  -ms-overflow-style: inherit;  /* IE and Edge */
+	  scrollbar-width: inherit;  /* Firefox */
 	}
 }
 
