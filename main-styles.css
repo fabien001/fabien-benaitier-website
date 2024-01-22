@@ -5,3 +5,22 @@
 	width:500px;
 	height:500px;
 }
+
+
+
+
+
+
+
+/* ↓ --------- Top menus --------- ↓ */
+
+.menu {
+	display:flex;
+	flex-direction:row;
+	flex-wrap:nowrap;
+	justify-content:flex-start;
+	align-items:baseline;
+	row-gap:;
+}
+
+/* ↑ --------- Top menus --------- ↑ */
