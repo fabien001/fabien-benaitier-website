@@ -7,18 +7,83 @@
 	<link rel="icon" href="assets/favicon.svg" >
 	<link rel="stylesheet" type="text/css" href="design-system.css">
 	<link rel="stylesheet" type="text/css" href="main-styles.css">
+	<link rel="stylesheet" type="text/css" href="./node_modules/swiper/swiper-bundle.min.css">
 	<script type="text/javascript" src="./node_modules/virtual-scroll/lib/virtualscroll.js"></script>
+	<script type="text/javascript" src="./node_modules/swiper/swiper-bundle.min.js"></script>
 </head>
 <body class="dot-pattern">
 
 
-	<ul class="menu level-1">
-		<li class="text kilo highlight">Intro</li>
-		<li class="text kilo highlight">Demo</li>
-		<li class="text kilo highlight">Projects</li>
-		<li class="text kilo highlight">Philosophy</li>
-		<li class="text kilo highlight">Touchpoints</li>
-	</ul>
+	<div class="main-container">
+
+		<ul class="menu level-1">
+			<li class="text kilo highlight">Intro</li>
+			<li class="text kilo highlight">Demo</li>
+			<li class="text kilo highlight">Projects</li>
+			<li class="text kilo highlight">Philosophy</li>
+			<li class="text kilo highlight">Touchpoints</li>
+		</ul>
+
+		<div class="swiper level-2">
+			<ul class="swiper-wrapper">
+				
+				<li class="swiper-slide">
+					<ul class="menu intro">
+						<li class="text deci highlight">What I do</li>
+						<li class="text deci highlight">My experience</li>
+						<li class="text deci highlight">Apart from that</li>
+					</ul>
+				</li>
+
+				<li class="swiper-slide">
+					<ul class="menu demo">
+						<li class="text deci highlight">This website</li>
+						<li class="text deci highlight">Discover</li>
+						<li class="text deci highlight">Conceptualize</li>
+						<li class="text deci highlight">Implement</li>
+					</ul>
+				</li>
+
+				<li class="swiper-slide">
+					<ul class="menu projects">
+						<li class="text deci highlight">Personas</li>
+						<li class="text deci highlight">Automatic alerts</li>
+						<li class="text deci highlight">Digital workstation</li>
+						<li class="text deci highlight">Desyre</li>
+						<li class="text deci highlight">PHEV coach</li>
+						<li class="text deci highlight">DS smart touch</li>
+					</ul>
+				</li>
+
+				<li class="swiper-slide">
+					<ul class="menu philosophy">
+						<li class="text deci highlight">We</li>
+						<li class="text deci highlight">Ship</li>
+						<li class="text deci highlight">Code</li>
+						<li class="text deci highlight">to Users</li>
+						<li class="text deci highlight">for Value</li>
+					</ul>
+				</li>
+
+				<li class="swiper-slide">
+					<ul class="menu touchpoints">
+						<li class="text deci highlight">Contact</li>
+						<li class="text deci highlight">Linkedin</li>
+						<li class="text deci highlight">Medium</li>
+						<li class="text deci highlight">Assets</li>
+					</ul>
+				</li>
+
+			</ul>
+		</div>
+
+
+		<div class="content" style="background: coral;flex-basis:100%;flex-shrink:10000;">
+			
+		</div>
+
+	</div>
+	
 
 	<script type="text/javascript" src="controller.js"></script>
 </body>

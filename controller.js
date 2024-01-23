@@ -1,7 +1,7 @@
 // Main javascript controller
 
 
-// Top menus controller
+// ---------------- ↓ Top menus controllers ↓ ----------------
 const menu_level_1 = document.querySelector(".menu.level-1");
 
 
@@ -24,3 +24,4 @@ scroller_menu.on(event => {
 	menu_level_1.scrollLeft -= absolute_delta;
 
 });
+// ---------------- ↑ Top menus controllers ↑ ----------------

@@ -113,6 +113,12 @@
 
 
 
+/* ↓ --------- Text weight on hover --------- ↓ */
+:root {
+	--text-hover-weight: "wght" 500;
+}
+/* ↑ --------- Text weight on hover --------- ↑ */
+
 /*---*/
 
 
