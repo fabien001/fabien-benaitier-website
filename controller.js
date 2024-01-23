@@ -2,9 +2,15 @@
 
 
 // ---------------- ↓ Top menus controllers ↓ ----------------
-const menu_level_1 = document.querySelector(".menu.level-1");
+const menus = document.querySelectorAll(".menu");
 
+menus.forEach( (menu) => {
 
+	// console.log(menu);
+
+});
+
+/*
 const scroller_menu_options = {
 	el: menu_level_1,
 	passive: true,
@@ -24,4 +30,5 @@ scroller_menu.on(event => {
 	menu_level_1.scrollLeft -= absolute_delta;
 
 });
+*/
 // ---------------- ↑ Top menus controllers ↑ ----------------
