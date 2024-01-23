@@ -62,6 +62,21 @@
 
 
 
+/* ↓ --------- Timings --------- ↓ */
+:root {
+	--timing-base: .3s;
+	--timing-double: .6s;
+	--timing-curve: ease-in-out;
+	--timing-curve-out: cubic-bezier(.17,.67,.5,1);
+}
+/* ↑ --------- Timings --------- ↑ */
+
+
+
+/*---*/
+
+
+
 /* ↓ --------- Text sizes --------- ↓ */
 /*Mobile*/
 @media only screen and (max-width: 600px) {
@@ -130,7 +145,9 @@
 	color: var(--color-primary);
 	margin:0;
 	max-width:100vw;
-	transition: font-variation-settings .5s ease-in-out;
+	transition-property:font-variation-settings;
+	transition-duration:var(--timing-base);
+	transition-timing-function:var(--timing-curve);
 }
 
 .text.tera {

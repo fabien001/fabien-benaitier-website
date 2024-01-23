@@ -16,19 +16,26 @@
 
 	<div class="main-container">
 
+		<!-- ↓ Top level menu ↓ -->
 		<ul class="menu level-1">
+			<div class="underline"></div>
 			<li class="text kilo highlight">Intro</li>
 			<li class="text kilo highlight">Demo</li>
 			<li class="text kilo highlight">Projects</li>
 			<li class="text kilo highlight">Philosophy</li>
 			<li class="text kilo highlight">Touchpoints</li>
 		</ul>
+		<!-- ↑ Top level menu ↑ -->
 
+
+
+		<!-- ↓ Menu level 2 ↓ -->
 		<div class="swiper level-2">
 			<ul class="swiper-wrapper">
 				
 				<li class="swiper-slide">
 					<ul class="menu intro">
+						<div class="underline"></div>
 						<li class="text deci highlight">What I do</li>
 						<li class="text deci highlight">My experience</li>
 						<li class="text deci highlight">Apart from that</li>
@@ -37,6 +44,7 @@
 
 				<li class="swiper-slide">
 					<ul class="menu demo">
+						<div class="underline"></div>
 						<li class="text deci highlight">This website</li>
 						<li class="text deci highlight">Discover</li>
 						<li class="text deci highlight">Conceptualize</li>
@@ -46,6 +54,7 @@
 
 				<li class="swiper-slide">
 					<ul class="menu projects">
+						<div class="underline"></div>
 						<li class="text deci highlight">Personas</li>
 						<li class="text deci highlight">Automatic alerts</li>
 						<li class="text deci highlight">Digital workstation</li>
@@ -57,6 +66,7 @@
 
 				<li class="swiper-slide">
 					<ul class="menu philosophy">
+						<div class="underline"></div>
 						<li class="text deci highlight">We</li>
 						<li class="text deci highlight">Ship</li>
 						<li class="text deci highlight">Code</li>
@@ -67,20 +77,187 @@
 
 				<li class="swiper-slide">
 					<ul class="menu touchpoints">
+						<div class="underline"></div>
+						<li class="text deci highlight">Links</li>
 						<li class="text deci highlight">Contact</li>
-						<li class="text deci highlight">Linkedin</li>
-						<li class="text deci highlight">Medium</li>
-						<li class="text deci highlight">Assets</li>
+						<li class="text deci highlight">Paper résumé</li>
+						<li class="text deci highlight">Paper portfolio</li>
 					</ul>
 				</li>
 
 			</ul>
 		</div>
+		<!-- ↑ Menu level 2 ↑ -->
 
 
-		<div class="content" style="background: coral;flex-basis:100%;flex-shrink:10000;">
-			
+		<!-- ↓ Content with sections ↓ -->
+		<div class="swiper content">
+
+			<ul class="swiper-wrapper">
+				
+				<li class="swiper-slide section color-1"
+				menu-level-1="intro"
+				menu-level-2="what-i-do"
+				menu-index="1.1">
+					<h1>What I do</h1>
+				</li>
+
+				<li class="swiper-slide section color-2"
+				menu-level-1="intro"
+				menu-level-2="what-i-do"
+				menu-index="1.2">
+					<h1>My experience</h1>
+				</li>
+
+				<li class="swiper-slide section color-1"
+				menu-level-1="intro"
+				menu-level-2="apart-from-that"
+				menu-index="1.3">
+					<h1>Apart from that</h1>
+				</li>
+
+				<li class="swiper-slide section color-2"
+				menu-level-1="demo"
+				menu-level-2="this-website"
+				menu-index="2.1">
+					<h1>This website</h1>
+				</li>
+
+				<li class="swiper-slide section color-1"
+				menu-level-1="demo"
+				menu-level-2="discover"
+				menu-index="2.2">
+					<h1>Discover</h1>
+				</li>
+
+				<li class="swiper-slide section color-2"
+				menu-level-1="demo"
+				menu-level-2="conceptualize"
+				menu-index="2.3">
+					<h1>Conceptualize</h1>
+				</li>
+
+				<li class="swiper-slide section color-1"
+				menu-level-1="demo"
+				menu-level-2="implement"
+				menu-index="2.4">
+					<h1>Implement</h1>
+				</li>
+
+				<li class="swiper-slide section color-2"
+				menu-level-1="projects"
+				menu-level-2="personas"
+				menu-index="3.1">
+					<h1>Personas</h1>
+				</li>
+
+				<li class="swiper-slide section color-1"
+				menu-level-1="projects"
+				menu-level-2="automatic-alerts"
+				menu-index="3.2">
+					<h1>Automatic alerts</h1>
+				</li>
+
+				<li class="swiper-slide section color-2"
+				menu-level-1="projects"
+				menu-level-2="Digital workstation"
+				menu-index="3.3">
+					<h1>Digital workstation</h1>
+				</li>
+
+				<li class="swiper-slide section color-1"
+				menu-level-1="projects"
+				menu-level-2="desyre"
+				menu-index="3.4">
+					<h1>Desyre</h1>
+				</li>
+
+				<li class="swiper-slide section color-2"
+				menu-level-1="projects"
+				menu-level-2="phev-coach"
+				menu-index="3.5">
+					<h1>PHEV coach</h1>
+				</li>
+
+				<li class="swiper-slide section color-1"
+				menu-level-1="projects"
+				menu-level-2="ds-smart-touch"
+				menu-index="3.6">
+					<h1>DS smart touch</h1>
+				</li>
+
+				<li class="swiper-slide section color-2"
+				menu-level-1="philosophy"
+				menu-level-2="we"
+				menu-index="4.1">
+					<h1>We</h1>
+				</li>
+
+				<li class="swiper-slide section color-1"
+				menu-level-1="philosophy"
+				menu-level-2="ship"
+				menu-index="4.2">
+					<h1>Ship</h1>
+				</li>
+
+				<li class="swiper-slide section color-2"
+				menu-level-1="philosophy"
+				menu-level-2="code"
+				menu-index="4.3">
+					<h1>Code</h1>
+				</li>
+
+				<li class="swiper-slide section color-1"
+				menu-level-1="philosophy"
+				menu-level-2="to-users"
+				menu-index="4.4">
+					<h1>to Users</h1>
+				</li>
+
+				<li class="swiper-slide section color-2"
+				menu-level-1="philosophy"
+				menu-level-2="for-value"
+				menu-index="4.5">
+					<h1>for Value</h1>
+				</li>
+
+				<li class="swiper-slide section color-1"
+				menu-level-1="touchpoints"
+				menu-level-2="links"
+				menu-index="5.1">
+					<h1>Links</h1>
+				</li>
+
+				<li class="swiper-slide section color-2"
+				menu-level-1="touchpoints"
+				menu-level-2="contact"
+				menu-index="5.2">
+					<h1>Contact</h1>
+				</li>
+
+				<li class="swiper-slide section color-1"
+				menu-level-1="touchpoints"
+				menu-level-2="paper-resume"
+				menu-index="5.3">
+					<h1>Paper résumé</h1>
+				</li>
+
+				<li class="swiper-slide section color-2"
+				menu-level-1="touchpoints"
+				menu-level-2="paper-portfolio"
+				menu-index="5.1">
+					<h1>Paper portfolio</h1>
+				</li>
+
+			</ul>
+
 		</div>
+		<!-- ↑ Content with sections ↑ -->
+
+
+		<!-- <div class="content" style="background: coral;flex-basis:100%;flex-shrink:10000;">
+			
+		</div> -->
 
 	</div>
 	
