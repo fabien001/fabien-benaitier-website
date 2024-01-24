@@ -1,30 +1,15 @@
 // Main javascript controller
 
 
+// The timing for swipers sliding to a slide
+const slide_to_timing = 750;
+
+
+
 // ---------------- ↓ Top menus controllers ↓ ----------------
 const menus = document.querySelectorAll(".menu");
 
-menus.forEach( (menu) => {
-
-	const scroller_menu_options = {
-		el: menu,
-		passive: true,
-		mouseMultiplier: 0.1,
-		useTouch: false
-	};
-
-	const scroller_menu = new virtualScroll(scroller_menu_options);
-
-	scroller_menu.on(event => {
-
-		const absolute_delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? Math.round(event.deltaX) : Math.round(event.deltaY);
-		
-		menu.scrollLeft -= absolute_delta;
-
-	});
-	
-});
-
+const menu_level_1 = document.querySelector(".menu.level-1");
 
 const menu_level_2 = new Swiper(".swiper.level-2", {
 
@@ -102,7 +87,7 @@ const set_active_menus = function(menu_level_1, menu_level_2, index){
 
 	// ---
 
-	menu_level_2.slideTo(index_level_1 - 1, 750);
+	menu_level_2.slideTo(index_level_1 - 1, slide_to_timing);
 
 	const menu_level_2_element = menu_level_2.slides[menu_level_2.activeIndex].querySelector(".menu");
 
@@ -110,7 +95,29 @@ const set_active_menus = function(menu_level_1, menu_level_2, index){
 
 }
 
-// set_active_menus(document.querySelector(".menu.level-1"), menu_level_2, "2.3");
+
+
+// Adding virtual scroll on menus for horizontal scrolling on desktop
+menus.forEach( (menu) => {
+
+	const scroller_menu_options = {
+		el: menu,
+		passive: true,
+		mouseMultiplier: 0.1,
+		useTouch: false
+	};
+
+	const scroller_menu = new virtualScroll(scroller_menu_options);
+
+	scroller_menu.on(event => {
+
+		const absolute_delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? Math.round(event.deltaX) : Math.round(event.deltaY);
+		
+		menu.scrollLeft -= absolute_delta;
+
+	});
+	
+});
 // ---------------- ↑ Top menus controllers ↑ ----------------
 
 
@@ -133,7 +140,48 @@ const content = new Swiper(".swiper.content", {
 
 content.on("activeIndexChange", (event) => {
 
-	console.log(content.slides[content.activeIndex].getAttribute("menu-index"));
+	const menu_submenu_index = content.slides[content.activeIndex].getAttribute("menu-index");
+
+	set_active_menus(menu_level_1, menu_level_2, menu_submenu_index);
 
 });
+
+
+// Showing the right content section when clicking on a menu item
+// And set active the right menu/submenu
+
+Array.from(menu_level_1.querySelectorAll("li")).reduce((accumulator, menu_level_1_item, index) => {
+
+	const fixed_acc = accumulator;
+
+	menu_level_1_item.addEventListener("click", () => {
+
+		content.slideTo(fixed_acc, slide_to_timing);
+
+	});
+
+	Array.from(menu_level_2.slides[index].querySelectorAll("li")).forEach((menu_level_2_item, index_2) => {
+
+		const fixed_acc = accumulator;
+
+		menu_level_2_item.addEventListener("click", () => {
+
+			content.slideTo(fixed_acc, slide_to_timing);
+
+		});
+
+		accumulator += 1;
+
+	});
+
+	return accumulator;
+
+}, 0);
+
+
 // ---------------- ↑ Content swiper controller ↑ ----------------
+
+
+
+// Initiate the active menu
+set_active_menus(menu_level_1, menu_level_2, "1.1");
