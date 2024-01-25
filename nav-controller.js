@@ -1,4 +1,4 @@
-// Main javascript controller
+// Javascript controller for menus and navigation
 
 
 // The timing for swipers sliding to a slide
@@ -142,7 +142,8 @@ const content = new Swiper(".swiper.content", {
         next: {
           translate: ["100%", 0, 0]
         },
-    }
+    },
+    nested: true
 });
 
 

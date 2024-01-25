@@ -171,6 +171,20 @@ body {
 .swiper.content li.color-2 {
 	background:lightseagreen;
 }
+
+.swiper.content li {
+	height:100%;
+	display: block;
+	position:relative;
+}
+
+.swiper.content li.section .container {
+	left:0;
+	top:0;
+	padding: 0;
+	padding-left:var(--size-l);
+	width:calc(100% - calc(var(--size-l) * 2));
+}
 /* ↑ --------- Content with sections --------- ↑ */
 
 
