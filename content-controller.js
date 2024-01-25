@@ -19,7 +19,7 @@ const scroll = new LocomotiveScroll({
 
 scroll.on("scroll", (event) => {
 
-	console.log(event);
+	// console.log(event);
 
 });
 // --------------- ↑ Content scrolling using locomotive scroll ↑ ---------------
