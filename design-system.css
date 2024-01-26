@@ -247,7 +247,6 @@
 
 
 /* ↓ --------- Comment component --------- ↓ */
-
 /*Comments text*/
 .comment.deci {
 	font-family:"Roboto Condensed", sans-serif;
@@ -427,10 +426,55 @@
 		margin-bottom: -0.95rem;
 	}
 }
-
-
 /* ↑ --------- Picture components --------- ↑ */
 
+
+
+
+
+
+
+
+
+/* ↓ --------- Focus text component --------- ↓ */
+p.focus {
+	position: relative;
+}
+
+p.focus strong {
+	position: relative;
+}
+
+p.focus strong::before {
+	content: "";
+	display: block;
+	position: absolute;
+	z-index: -1;
+	opacity:0.6;
+
+	top:25%;
+	left:var(--size-base);
+	height:80%;
+	width: 0%;
+	background: var(--color-highlight);
+}
+
+p.focus.is-inview strong::before {
+	animation-name: text-focus-appears;
+	animation-duration: var(--timing-double);
+	animation-timing-function: var(--timing-curve);
+	animation-fill-mode: forwards;
+}
+
+@keyframes text-focus-appears {
+	from{
+		width: 0%;
+	}
+	to{
+		width: 100%;
+	}
+}
+/* ↑ --------- Focus text component --------- ↑ */
 
 
 
