@@ -53,10 +53,11 @@ const append_content_slide = function(swiper_wrapper, template, raw_html_content
 
 
 	// Always adding an empty div with a certain height at the end of the scrollable content for locomotive scroll
-	const add_height = document.createElement("div");
-	add_height.style.height = "50vh";
+	// const add_height = document.createElement("div");
+	
+	// add_height.style.height = "100vh";
 
-	swiper_slide.querySelector(".content-container").appendChild(add_height);
+	// swiper_slide.querySelector(".content-container").appendChild(add_height);
 
 	swiper_wrapper.appendChild(swiper_slide);
 
@@ -125,6 +126,7 @@ document.addEventListener("content-slides-created", () => {
 	        new LocomotiveScroll({
 	            el: scroll_container,
 	            smooth: true,
+	            // offset: ["20%", "20%"],
 	            mobile: {
 	                breakpoint: 0
 	            },

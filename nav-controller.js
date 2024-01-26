@@ -135,7 +135,8 @@ document.addEventListener("content-slides-created", () => {
 		slidesPerView: 1,
 		mousewheel: {
 			forceToAxis: true,
-			sensitivity: 5
+			sensitivity: 5,
+			thresholdDelta: 15
 		},
 		effect: "creative",
 	  	creativeEffect: {
