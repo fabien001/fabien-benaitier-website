@@ -42,10 +42,14 @@ const append_content_slide = function(swiper_wrapper, template, raw_html_content
 
 	swiper_slide.querySelector(".section").setAttribute("menu-index", menu_index);
 
-	var parser = new DOMParser();
-	var html_content = parser.parseFromString(raw_html_content, 'text/html').body.firstChild;
+	const parser = new DOMParser();
+	let html_content = parser.parseFromString(raw_html_content, 'text/html').body.childNodes;
 
-	swiper_slide.querySelector(".content-container").appendChild(html_content);
+	html_content.forEach((node) => {
+
+		swiper_slide.querySelector(".content-container").appendChild(node);
+
+	});
 
 	swiper_wrapper.appendChild(swiper_slide);
 
@@ -103,6 +107,32 @@ Promise.all(all_raw_html_content).then((all_raw_html_content) => {
 
 
 // --------------- ↓ Content scrolling using locomotive scroll ↓ ---------------
+// document.addEventListener("content-slides-created", () => {
+
+
+// 	const scrollers = [];
+
+// 	Array.from(document.querySelectorAll('[data-scroll-container]')).forEach((scroll_container) => {
+
+// 	    scrollers.push(
+// 	        new LocomotiveScroll({
+// 	            el: scroll_container,
+// 	            smooth: true,
+// 	            mobile: {
+// 	                breakpoint: 0
+// 	            },
+// 	            tablet: {
+// 	                breakpoint: 0
+// 	            }
+// 	    }));
+
+// 	});
+
+
+// });
+// End of content slides created eventListener
+
+
 // const scroll = new LocomotiveScroll({
 //     el: document.querySelector('[data-scroll-container]'),
 //     smooth: true,
