@@ -107,29 +107,29 @@ Promise.all(all_raw_html_content).then((all_raw_html_content) => {
 
 
 // --------------- ↓ Content scrolling using locomotive scroll ↓ ---------------
-// document.addEventListener("content-slides-created", () => {
+document.addEventListener("content-slides-created", () => {
 
 
-// 	const scrollers = [];
+	const scrollers = [];
 
-// 	Array.from(document.querySelectorAll('[data-scroll-container]')).forEach((scroll_container) => {
+	Array.from(document.querySelectorAll('[data-scroll-container]')).forEach((scroll_container) => {
 
-// 	    scrollers.push(
-// 	        new LocomotiveScroll({
-// 	            el: scroll_container,
-// 	            smooth: true,
-// 	            mobile: {
-// 	                breakpoint: 0
-// 	            },
-// 	            tablet: {
-// 	                breakpoint: 0
-// 	            }
-// 	    }));
+	    scrollers.push(
+	        new LocomotiveScroll({
+	            el: scroll_container,
+	            smooth: true,
+	            mobile: {
+	                breakpoint: 0
+	            },
+	            tablet: {
+	                breakpoint: 0
+	            }
+	    }));
 
-// 	});
+	});
 
 
-// });
+});
 // End of content slides created eventListener
 
 

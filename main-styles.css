@@ -176,9 +176,11 @@ body {
 .swiper.content .content-wrapper {
 	display:block;
 	position:absolute;
-	width:100%;
+	
+	width: calc(100% - calc(var(--size-l) * 2));
+  	left: var(--size-l);
+
 	height:100%;
-	left:0;
 	top:0;
 	margin:0;
 	padding:0;
