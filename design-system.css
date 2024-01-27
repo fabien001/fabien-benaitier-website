@@ -386,10 +386,10 @@
 		margin-bottom: -3.5rem;
 	}
 	.picture .subtitle.mega {
-		margin-bottom: -2.85rem;
+		margin-bottom: -2.86rem;
 	}
 	.picture .subtitle.kilo {
-		margin-bottom: -2.55rem;
+		margin-bottom: -2.2rem;
 	}
 	.picture .subtitle.deci {
 		margin-bottom: -1.3rem;
@@ -441,8 +441,16 @@ p.focus {
 	position: relative;
 }
 
+/*Desktop*/
+@media only screen and (min-width: 600px) {
+	p.focus {
+		max-width: 750px;
+	}
+}
+
 p.focus strong {
 	position: relative;
+	white-space: nowrap;
 }
 
 p.focus strong::before {
@@ -457,22 +465,14 @@ p.focus strong::before {
 	height:80%;
 	width: 0%;
 	background: var(--color-highlight);
+
+	transition-property: width;
+	transition-duration: var(--timing-double);
+	transition-timing-function: var(--timing-curve);
 }
 
 p.focus.is-inview strong::before {
-	animation-name: text-focus-appears;
-	animation-duration: var(--timing-double);
-	animation-timing-function: var(--timing-curve);
-	animation-fill-mode: forwards;
-}
-
-@keyframes text-focus-appears {
-	from{
-		width: 0%;
-	}
-	to{
-		width: 100%;
-	}
+	width:100%;
 }
 /* ↑ --------- Focus text component --------- ↑ */
 
@@ -485,6 +485,7 @@ p.focus.is-inview strong::before {
 
 
 /* ↓ --------- Animations --------- ↓ */
+
 /* ↑ --------- Animations --------- ↑ */
 
 

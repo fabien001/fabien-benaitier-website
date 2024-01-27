@@ -177,16 +177,148 @@ body {
 	display:block;
 	position:absolute;
 	
-	width: calc(100% - calc(var(--size-l) * 2));
-  	left: var(--size-l);
+	width: 100%;
+  	left: 0;
 
 	height:100%;
 	top:0;
 	margin:0;
-	padding:0;
+	padding: 0;
+}
+
+
+
+/*Mobile*/
+@media only screen and (max-width: 600px) {
+	.swiper.content .content-container {
+		padding-left:var(--size-xs);
+		padding-right: var(--size-xs);
+	}
+}
+
+
+/*Desktop*/
+@media only screen and (min-width: 600px) {
+	.swiper.content .content-container {
+		padding-left:var(--size-l);
+		padding-right: var(--size-l);
+	}
 }
 /* ↑ --------- Content with sections --------- ↑ */
 
+
+
+
+
+
+
+
+
+
+
+/* ↓ --------- Specific styling --------- ↓ */
+/*Mobile*/
+@media only screen and (max-width: 600px) {
+	
+
+
+}
+
+
+/*Desktop*/
+@media only screen and (min-width: 600px) {
+	
+	#profile-pict{
+		max-width:600px;
+	}
+
+}
+
+
+/* --- */
+
+
+#a7-years {
+	display:flex;
+	flex-direction: row;
+	align-items: baseline;
+	justify-content: flex-start;
+}
+
+#a7-years p:first-child {
+	font-variation-settings: "wght" 100;
+	transition-property: font-variation-settings;
+	transition-duration: var(--timing-double);
+	transition-timing-function: var(--timing-curve);
+}
+#a7-years.is-inview p:first-child {
+	font-variation-settings: "wght" 900;
+}
+
+
+/*Mobile*/
+@media only screen and (max-width: 600px) {
+
+	#a7-years {
+		column-gap: var(--size-xs);
+	}
+
+	#a7-years p:first-child {
+		font-size:10rem;
+	}
+}
+/*Desktop*/
+@media only screen and (min-width: 600px) {
+
+	#a7-years {
+		column-gap: var(--size-s);
+	}
+
+	#a7-years p:first-child {
+		font-size:14rem;
+	}
+}
+
+
+
+/*---*/
+
+
+#diagram-business-users-technique img {
+	width: 100%;
+	transform: scale(2) rotate(30deg);
+	filter:blur(10px);
+	opacity: 0;
+
+	transition-property: transform, opacity, filter;
+	transition-duration: var(--timing-triple);
+	transition-timing-function: var(--timing-curve);
+}
+#diagram-business-users-technique.is-inview img {
+	transform: scale(1) rotate(0deg);
+	filter: blur(0px);
+	opacity: 1;
+}
+
+/*Desktop*/
+@media only screen and (min-width: 600px) {
+	#diagram-business-users-technique img {
+		max-width:600px;
+	}
+}
+
+#diagram-business-users-technique h2 {
+	clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+
+	transition-property: clip-path;
+	transition-duration: var(--timing-double);
+	transition-timing-function: var(--timing-curve);
+}
+#diagram-business-users-technique.is-inview h2 {
+	clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%);
+}
+
+/* ↑ --------- Specific styling --------- ↑ */
 
 
 
