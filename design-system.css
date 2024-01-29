@@ -342,11 +342,34 @@
 .picture .subtitle {
 	position:relative;
 	z-index:2;
+
+	transform: translateX(-200px);
+	opacity:0;
+
+	transition-property: transform, opacity;
+	transition-duration: var(--timing-double);
+	transition-timing-function: var(--timing-curve);
 }
+.picture.is-inview .subtitle {
+	transform: translateX(0px);
+	opacity:1;
+}
+
+
 
 .picture img {
 	max-width: 100%;
+	clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+
+	transition-property: clip-path;
+	transition-duration: var(--timing-double);
+	transition-timing-function: var(--timing-curve);
 }
+.picture.is-inview img {
+	clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%);
+}
+
+
 
 .picture .image {
 	display:block;
@@ -497,16 +520,22 @@ p.focus.is-inview strong::before {
 	color: var(--color-contrast-2);
 	font-variation-settings: "wght" 800;
 	letter-spacing: normal;
-
-	transition-property: font-variation-settings, letter-spacing;
-
 	background: var(--color-primary);
-	transition-duration: var(--timing-base);
+
+	clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+
+	transition-property: clip-path, font-variation-settings, letter-spacing;
+	transition-duration: var(--timing-double);
 	transition-timing-function: var(--timing-curve);
+}
+
+.button.is-inview {
+	clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%);
 }
 
 .button:hover {
 	cursor: pointer;
+	transition-duration: var(--timing-base);
 	font-variation-settings: var(--text-hover-weight);
 	letter-spacing: 2px;
 }
