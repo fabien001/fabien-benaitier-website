@@ -115,15 +115,81 @@ Promise.all(all_raw_html_content).then((all_raw_html_content) => {
 
 
 // --------------- ↓ Content scrolling using locomotive scroll ↓ ---------------
+const trigger_read_next_at_progress = 0.6;
+
+const slide_next_event = new Event("slide-next");
+
+let already_triggered_next = false;
+
+
+
+// Resetting the scroll to the top
+const reset_scroll = function(scroller) {
+
+	scroller.scrollTo("top", {
+		duration: 100,
+		callback: function(){
+
+			Array.from(scroller.el.children).forEach((elem) => {
+
+				elem.classList.remove("is-inview");
+
+			});
+
+		}
+	});
+
+}
+
+
+
+
+const trigger_read_next = function(read_next_obj, scroller) {
+
+	const text_over_obj = read_next_obj.el.querySelector("p.text-over");
+
+    const progress_to_perc = 
+    	Math.min(
+        	(Math.round(
+        		((read_next_obj.progress * 100)/trigger_read_next_at_progress)
+        		*100
+			))
+			/100, 
+			100
+		);
+
+    text_over_obj.style.clipPath = `polygon(0 0, ${progress_to_perc}% 0, ${progress_to_perc}% 100%, 0 100%)`;
+
+
+    if(progress_to_perc >= 100 && !already_triggered_next){
+
+    	document.dispatchEvent(slide_next_event);
+
+    	already_triggered_next = true;
+
+    	const timer = setTimeout(() => {
+
+    		clearTimeout(timer);
+
+    		already_triggered_next = false;
+
+    		reset_scroll(scroller);
+
+    	}, 1500);
+
+    }
+
+}
+
+
+
 document.addEventListener("content-slides-created", () => {
-
-
+	
 	const scrollers = [];
 
-	Array.from(document.querySelectorAll('[data-scroll-container]')).forEach((scroll_container) => {
+	Array.from(document.querySelectorAll('[data-scroll-container]')).forEach((scroll_container, index) => {
 
-	    scrollers.push(
-	        new LocomotiveScroll({
+		const scroller = new LocomotiveScroll({
 	            el: scroll_container,
 	            smooth: true,
 	            // offset: ["20%", "20%"],
@@ -133,18 +199,24 @@ document.addEventListener("content-slides-created", () => {
 	            tablet: {
 	                breakpoint: 0
 	            }
-	    }));
+	    });
+
+		// Dealing with read next action on scroll
+	    scroller.on("scroll", (evt) => {
+
+			if(typeof evt.currentElements['read-next'] === 'object') {
+
+				const read_next_obj = evt.currentElements['read-next'];
+
+				trigger_read_next(read_next_obj, scroller);
+
+		    }
+
+		});
+
+	    scrollers.push(scroller);
 
 	});
-
-	// scrollers[0].on("scroll", (evt) => {
-
-	// 	if(typeof evt.currentElements['a7'] === 'object') {
-	//         let progress = evt.currentElements['a7'].progress;
-	//         console.log(progress);
-	//     }
-
-	// });
 
 
 });

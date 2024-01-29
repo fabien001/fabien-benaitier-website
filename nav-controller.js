@@ -239,6 +239,16 @@ document.addEventListener("content-slides-created", () => {
 
 	}, 0);
 
+
+
+
+
+	document.addEventListener("slide-next", () => {
+
+		content.slideNext(slide_to_timing);
+
+	});
+
 });
 // End of content slides created eventListener
 

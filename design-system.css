@@ -662,6 +662,55 @@ p.focus.is-inview strong::before {
 
 
 
+
+
+/* ↓ --------- Read next component --------- ↓ */
+.read-next {
+	position: relative;
+
+	padding:0;
+}
+
+.read-next p {
+	position: absolute;
+	display: block;
+	left:0;
+	top:0;
+	margin:0;
+
+	padding-left: var(--size-double);
+	padding-right: var(--size-double);
+	padding-top: var(--size-base);
+	padding-bottom: 0;
+
+	font-family: "League Spartan", sans-serif;
+	font-size: var(--font-size-kilo);
+	font-optical-sizing: auto;
+	font-variation-settings: "wght" 800;
+	letter-spacing: normal;
+	background: var(--color-primary);
+	border:1px solid var(--color-primary);
+}
+
+.read-next p.text-under {
+	color: var(--color-primary);
+	background:transparent;
+}
+
+.read-next p.text-over {
+	color: var(--color-contrast-2);
+	clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+}
+/* ↑ --------- Read next component --------- ↑ */
+
+
+
+
+
+
+
+
+
 /* ↓ --------- Animations --------- ↓ */
 
 /* ↑ --------- Animations --------- ↑ */
