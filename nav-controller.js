@@ -20,6 +20,29 @@ const menu_level_2 = new Swiper(".swiper.level-2", {
 });
 
 
+
+// Launching animations at page load
+const launch_animations_on_page_load = function(menu_level_1_obj, menu_level_2_obj, content_obj) {
+
+	const args = Array.from(arguments);
+
+	args.forEach((obj, index) => {
+
+		obj.style.transitionDelay = `${index * 250}ms`;
+
+		const timer = setTimeout(() => {
+
+			clearTimeout(timer);
+
+			obj.classList.replace("page-not-loaded", "page-loaded");
+
+		}, 10);
+
+	});
+
+}
+
+
 // Set individual menu item as active
 const set_active_menu_item = function(menu_element, index){
 
@@ -250,6 +273,13 @@ document.addEventListener("content-slides-created", () => {
 		return accumulator;
 
 	}, 0);
+
+
+
+
+
+	// Launch animations on page load
+	launch_animations_on_page_load(menu_level_1, menu_level_2.el, content.el);
 
 
 

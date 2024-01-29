@@ -35,6 +35,24 @@ body {
 
 
 
+
+
+/* ↓ --------- Page onload animation --------- ↓ */
+.page-not-loaded {
+	transform: translateX(100%);
+}
+.page-loaded {
+	transform: translateX(0);
+	transition-property: transform;
+	transition-duration: var(--timing-triple);
+	transition-timing-function: var(--timing-curve-out);
+}
+/* ↑ --------- Page onload animation --------- ↑ */
+
+
+
+
+
 /*----*/
 
 
