@@ -67,10 +67,16 @@ body {
 	text-decoration:none;
 	list-style:none;
 	white-space:nowrap;
+	letter-spacing: normal;
+	transition-property: font-variation-settings, letter-spacing;
+	transition-duration:var(--timing-base);
+	transition-timing-function:var(--timing-curve);
+
 }
 .menu li:hover {
 	cursor:pointer;
 	font-variation-settings: var(--text-hover-weight) !important;
+	letter-spacing: 4px;
 }
 .menu li.active {
 	font-variation-settings: "wght" 100 !important;

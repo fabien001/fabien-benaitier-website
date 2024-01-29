@@ -4,7 +4,7 @@
 
 
 /* ↓ --------- Fonts --------- ↓ */
-@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&family=Roboto+Condensed:ital,wght@1,800');
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&family=Roboto+Condensed:ital,wght@1,100..900');
 /* ↑ --------- Fonts --------- ↑ */
 
 
@@ -248,44 +248,56 @@
 
 /* ↓ --------- Comment component --------- ↓ */
 /*Comments text*/
-.comment.deci {
+.comment.deci p {
 	font-family:"Roboto Condensed", sans-serif;
 	font-size: var(--font-size-deci);
 	line-height: var(--font-size-kilo);
-/*	font-weight: 900;*/
+	font-variation-settings: "wght" 800;
 	color:var(--color-highlight-strong);
 
 }
 
-.comment.centi {
+.comment.centi p {
 	font-family:"Roboto Condensed", sans-serif;
 	font-size: var(--font-size-centi);
 	line-height: var(--font-size-deci);
-/*	font-weight: 900;*/
+	font-variation-settings: "wght" 800;
 	color:var(--color-highlight-strong);
 
 }
 
-.comment.mili {
+.comment.mili p {
 	font-family:"Roboto Condensed", sans-serif;
 	font-size: var(--font-size-mili);
 	line-height: var(--font-size-centi);
-/*	font-weight: 900;*/
+	font-variation-settings: "wght" 800;
 	color:var(--color-highlight-strong);
 
 }
 
 .comment {
 	position: relative;
-	max-width: 500px;
-	text-align: right;
-	float:right;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
 
+	transform: translateX(-200px);
 	opacity: 0;
-	transform: translateX(-150px);
+
+	transition-property: transform, opacity;
+	transition-duration: var(--timing-double);
+	transition-timing-function: var(--timing-curve);
 }
 
-.comment::after {
+.comment p {
+	display: block;
+	position: relative;
+	max-width: 500px;
+	text-align: right;
+	margin:0;
+}
+
+.comment p::after {
 	content:"";
 	display:block;
 	position: absolute;
@@ -296,39 +308,20 @@
 	height:1px;
 
 	background: var(--color-highlight-strong);
+
+	transition-property: width;
+	transition-duration: var(--timing-base);
+	transition-timing-function: var(--timing-curve);
+	transition-delay: var(--timing-double);
 }
 
 .comment.is-inview {
-	animation-name: comment-appears;
-	animation-duration: var(--timing-triple);
-	animation-timing-function: var(--timing-curve);
-	animation-fill-mode: forwards;
+	transform: translateX(0px);
+	opacity: 1;
 }
 
-.comment.is-inview::after {
-	animation-name: comment-underline-appears;
-	animation-duration: var(--timing-triple);
-	animation-timing-function: var(--timing-curve);
-	animation-fill-mode: forwards;
-}
-
-@keyframes comment-appears {
-	from{
-		opacity: 0;
-		transform: translateX(-150px);
-	}
-	to{
-		opacity: 1;
-		transform: translateX(0px);
-	}
-}
-@keyframes comment-underline-appears {
-	from{
-		width: 0%;
-	}
-	to{
-		width: 100%;
-	}
+.comment.is-inview p::after {
+	width: 100%;
 }
 
 /* ↑ --------- Comment component --------- ↑ */
@@ -476,6 +469,162 @@ p.focus.is-inview strong::before {
 }
 /* ↑ --------- Focus text component --------- ↑ */
 
+
+
+
+
+
+
+
+/* ↓ --------- Button component --------- ↓ */
+.button {
+	outline:none;
+	border:none;
+	text-decoration: none;
+	display: block;
+	position: relative;
+
+	width:fit-content;
+
+	padding-left: var(--size-double);
+	padding-right: var(--size-double);
+	padding-top: var(--size-base);
+	padding-bottom: 0;
+
+	font-family: "League Spartan", sans-serif;
+	font-size: var(--font-size-deci);
+	font-optical-sizing: auto;
+	color: var(--color-contrast-2);
+	font-variation-settings: "wght" 800;
+	letter-spacing: normal;
+
+	transition-property: font-variation-settings, letter-spacing;
+
+	background: var(--color-primary);
+	transition-duration: var(--timing-base);
+	transition-timing-function: var(--timing-curve);
+}
+
+.button:hover {
+	cursor: pointer;
+	font-variation-settings: var(--text-hover-weight);
+	letter-spacing: 2px;
+}
+/* ↑ --------- Button component --------- ↑ */
+
+
+
+
+
+
+
+
+
+
+/* ↓ --------- Button component --------- ↓ */
+
+.bubble, .bubble.right {
+	width:100%;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+
+	opacity:0;
+
+	transition-property: transform, opacity;
+	transition-duration: var(--timing-double);
+	transition-timing-function: var(--timing-curve-out);
+}
+.bubble {
+	transform: translateX(200px);
+}
+.bubble.right {
+	align-items: flex-end;
+	transform: translateX(-200px);
+}
+
+.bubble.is-inview, .bubble.right.is-inview {
+	opacity:1;
+	transform: translateX(0px);
+}
+
+
+.bubble h3 {
+	font-family: "League Spartan", sans-serif;
+	font-optical-sizing: auto;
+	color: var(--color-primary);
+	font-size:var(--font-size-deci);
+}
+
+
+.bubble p {
+	display:block;
+	position:relative;
+	margin:0;
+
+	padding-left: var(--size-double);
+	padding-right: var(--size-double);
+	padding-top: var(--size-double);
+	padding-bottom: var(--size-double);
+
+	border-top:1px solid var(--color-primary);
+	border-left:1px solid var(--color-primary);
+	border-right:1px solid var(--color-primary);
+
+	font-family:"Roboto Condensed", sans-serif;
+	font-size: var(--font-size-centi);
+	font-variation-settings: "wght" 200;
+	font-optical-sizing: auto;
+	color: var(--color-primary);
+}
+
+.bubble p:after {
+	content: "";
+	display: block;
+	position: absolute;
+
+	top:calc(100% - 1px);
+	left:-1px;
+	width:calc(100% + 2px);
+	height:23px;
+
+	background-color: none;
+	background-position: 0 0;
+	background-image:url("./assets/bubble-pointer-left.svg");
+}
+
+
+.bubble.right h3 {
+	text-align: right;
+}
+.bubble.right p {
+	text-align: right;
+}
+.bubble.right p:after {
+	background-image:url("./assets/bubble-pointer-right.svg");
+	background-position: 100% 0;
+}
+
+
+/*Mobile*/
+@media only screen and (max-width: 600px) {
+	.bubble h3 {
+		margin-bottom: -0.8rem;
+	}
+}
+
+/*Desktop*/
+@media only screen and (min-width: 600px) {
+	.bubble p {
+		max-width:600px;
+	}
+
+	.bubble h3 {
+		margin-bottom: -1.1rem;
+	}
+}
+
+/* ↑ --------- Button component --------- ↑ */
 
 
 
