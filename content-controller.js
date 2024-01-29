@@ -121,6 +121,23 @@ const slide_next_event = new Event("slide-next");
 
 let already_triggered_next = false;
 
+const scrollers = [];
+
+
+
+
+const enable_scroll_on_active_content_slide = function(scrollers, content_slide_index){
+
+	scrollers.forEach((scroller) => {
+
+		scroller.stop();
+
+	});
+
+	scrollers[content_slide_index].start();
+
+}
+
 
 
 // Resetting the scroll to the top
@@ -130,11 +147,17 @@ const reset_scroll = function(scroller) {
 		duration: 100,
 		callback: function(){
 
-			Array.from(scroller.el.children).forEach((elem) => {
+			const timer = setTimeout(() => {
 
-				elem.classList.remove("is-inview");
+				Array.from(scroller.el.children).forEach((elem) => {
 
-			});
+					elem.classList.remove("is-inview");
+
+				});
+
+			}, 110);
+
+			already_triggered_next = false;
 
 		}
 	});
@@ -163,15 +186,13 @@ const trigger_read_next = function(read_next_obj, scroller) {
 
     if(progress_to_perc >= 100 && !already_triggered_next){
 
-    	document.dispatchEvent(slide_next_event);
-
     	already_triggered_next = true;
+
+    	document.dispatchEvent(slide_next_event);
 
     	const timer = setTimeout(() => {
 
     		clearTimeout(timer);
-
-    		already_triggered_next = false;
 
     		reset_scroll(scroller);
 
@@ -182,16 +203,14 @@ const trigger_read_next = function(read_next_obj, scroller) {
 }
 
 
-
 document.addEventListener("content-slides-created", () => {
-	
-	const scrollers = [];
 
 	Array.from(document.querySelectorAll('[data-scroll-container]')).forEach((scroll_container, index) => {
 
 		const scroller = new LocomotiveScroll({
 	            el: scroll_container,
 	            smooth: true,
+	            multiplier: 0.5,
 	            // offset: ["20%", "20%"],
 	            mobile: {
 	                breakpoint: 0
@@ -218,6 +237,16 @@ document.addEventListener("content-slides-created", () => {
 
 	});
 
+
+	enable_scroll_on_active_content_slide(scrollers, 0);
+
+
+});
+
+
+document.addEventListener("enable-scroll", (event) => {
+
+	enable_scroll_on_active_content_slide(scrollers, event.detail);
 
 });
 // --------------- ↑ Content scrolling using locomotive scroll ↑ ---------------

@@ -189,6 +189,12 @@ document.addEventListener("content-slides-created", () => {
 
 		avoid_flicker_effect(content, prev_slide_index, current_slide_index);
 
+
+
+		const enable_scroll_on_current_content_slide_event = new CustomEvent("enable-scroll", { detail: current_slide_index });
+
+		document.dispatchEvent(enable_scroll_on_current_content_slide_event);
+
 	});
 
 
@@ -201,6 +207,12 @@ document.addEventListener("content-slides-created", () => {
 		const next_slide_index = (current_slide_index + 1) <= (content.slides.length - 1) ? current_slide_index + 1 : current_slide_index;
 
 		avoid_flicker_effect(content, prev_slide_index, current_slide_index, next_slide_index);
+
+
+
+		const enable_scroll_on_current_content_slide_event = new CustomEvent("enable-scroll", { detail: current_slide_index });
+
+		document.dispatchEvent(enable_scroll_on_current_content_slide_event);
 
 	});
 
@@ -259,3 +271,6 @@ document.addEventListener("content-slides-created", () => {
 
 // Initiate the active menu
 set_active_menus(menu_level_1, menu_level_2, "1.1");
+
+
+
