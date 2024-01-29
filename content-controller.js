@@ -137,19 +137,15 @@ document.addEventListener("content-slides-created", () => {
 
 	});
 
+	// scrollers[0].on("scroll", (evt) => {
+
+	// 	if(typeof evt.currentElements['a7'] === 'object') {
+	//         let progress = evt.currentElements['a7'].progress;
+	//         console.log(progress);
+	//     }
+
+	// });
+
 
 });
-// End of content slides created eventListener
-
-
-// const scroll = new LocomotiveScroll({
-//     el: document.querySelector('[data-scroll-container]'),
-//     smooth: true,
-//     tablet: {
-// 	    breakpoint: 0
-//   	},
-//   	mobile: {
-// 	    breakpoint: 0
-//   	}
-// });
 // --------------- ↑ Content scrolling using locomotive scroll ↑ ---------------
