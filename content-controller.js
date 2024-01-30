@@ -53,14 +53,6 @@ const append_content_slide = function(swiper_wrapper, template, raw_html_content
 
 	});
 
-
-	// Always adding an empty div with a certain height at the end of the scrollable content for locomotive scroll
-	// const add_height = document.createElement("div");
-	
-	// add_height.style.height = "100vh";
-
-	// swiper_slide.querySelector(".content-container").appendChild(add_height);
-
 	swiper_wrapper.appendChild(swiper_slide);
 
 };
@@ -138,11 +130,15 @@ const enable_scroll_on_active_content_slide = function(scrollers, content_slide_
 
 		scroller.stop();
 
+		scroller.scrollbar_elem.style.visibility = "hidden";
+
 	});
 
 	scrollers[content_slide_index].update();
 
 	scrollers[content_slide_index].start();
+
+	scrollers[content_slide_index].scrollbar_elem.style.visibility = "visible";
 
 }
 
@@ -252,6 +248,9 @@ document.addEventListener("content-slides-created", () => {
 	                breakpoint: 0
 	            }
 	    });
+
+
+	    scroller.scrollbar_elem = document.querySelectorAll(".c-scrollbar")[index];
 
 
 		// Dealing with read next action on scroll
