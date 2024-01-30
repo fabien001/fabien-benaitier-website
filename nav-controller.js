@@ -1,4 +1,5 @@
 // Javascript controller for menus and navigation
+window.addEventListener("load", () => {
 
 
 // The timing for swipers sliding to a slide
@@ -128,7 +129,7 @@ menus.forEach( (menu) => {
 // ---------------- ↓ Content swiper controller ↓ ----------------
 const send_event = function(event_name, event_data = null){
 
-	const event = new CustomEvent("enable-scroll", { detail: event_data });
+	const event = new CustomEvent(event_name, { detail: event_data });
 
 	document.dispatchEvent(event);
 
@@ -173,6 +174,8 @@ const slide_change = function(content_swiper_obj, menu_level_1, menu_level_2) {
 	avoid_flicker_effect(content_swiper_obj, prev_slide_index, current_slide_index);
 
 	send_event("enable-scroll", current_slide_index);
+
+	send_event("reset-scroll", prev_slide_index);
 
 }
 
@@ -295,3 +298,4 @@ set_active_menus(menu_level_1, menu_level_2, "1.1");
 
 
 
+});// End of page load event listener

@@ -1,5 +1,5 @@
 // Javascript controller for content scrolling
-
+window.addEventListener("load", () => {
 
 
 const content_files_paths = [
@@ -140,6 +140,8 @@ const enable_scroll_on_active_content_slide = function(scrollers, content_slide_
 
 	});
 
+	scrollers[content_slide_index].update();
+
 	scrollers[content_slide_index].start();
 
 }
@@ -149,26 +151,59 @@ const enable_scroll_on_active_content_slide = function(scrollers, content_slide_
 // Resetting the scroll to the top
 const reset_scroll = function(scroller) {
 
-	scroller.scrollTo("top", {
-		duration: 100,
-		callback: function(){
+	let timer = setTimeout(() => {
 
-			const timer = setTimeout(() => {
+    		clearTimeout(timer);
 
-				Array.from(scroller.el.children).forEach((elem) => {
+    		scroller.scrollTo("top", {
+				duration: 100,
+				callback: function(){
 
-					elem.classList.remove("is-inview");
+					let timer = setTimeout(() => {
 
-				});
+						clearTimeout(timer);
 
-			}, 110);
+						Array.from(scroller.el.children).forEach((elem) => {
 
-			already_triggered_next = false;
+							elem.classList.remove("is-inview");
 
-		}
-	});
+						});
+
+					}, 110);
+
+					already_triggered_next = false;
+
+				}
+			});
+
+    	}, 750);
 
 }
+
+document.addEventListener("reset-scroll", (event) => {
+
+	const scroller = scrollers[event.detail];
+
+	if(scrollers.length > 0){
+
+		reset_scroll(scroller);
+
+	}
+	else {
+
+		const timer = setTimeout(() => {
+
+			clearTimeout(timer);
+
+			const chaining_event = new CustomEvent("reset-scroll", { detail: event.detail });
+
+			document.dispatchEvent(chaining_event);
+
+		}, 100);
+
+	}
+
+});
 
 
 
@@ -196,14 +231,6 @@ const trigger_read_next = function(read_next_obj, scroller) {
 
     	document.dispatchEvent(slide_next_event);
 
-    	const timer = setTimeout(() => {
-
-    		clearTimeout(timer);
-
-    		reset_scroll(scroller);
-
-    	}, 1500);
-
     }
 
 }
@@ -225,6 +252,7 @@ document.addEventListener("content-slides-created", () => {
 	                breakpoint: 0
 	            }
 	    });
+
 
 		// Dealing with read next action on scroll
 	    scroller.on("scroll", (evt) => {
@@ -270,3 +298,8 @@ document.addEventListener("enable-scroll", (event) => {
 
 });
 // --------------- ↑ Content scrolling using locomotive scroll ↑ ---------------
+
+
+
+
+});// End of page load event listener
