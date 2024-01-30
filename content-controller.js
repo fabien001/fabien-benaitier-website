@@ -36,11 +36,13 @@ const swiper_content = document.querySelector(".swiper.content .swiper-wrapper")
 const content_slide_template = document.getElementById("content-slide-template");
 
 
-const append_content_slide = function(swiper_wrapper, template, raw_html_content, menu_index){
+const append_content_slide = function(swiper_wrapper, template, raw_html_content, menu_index, data_history_name){
 
 	const swiper_slide = template.content.cloneNode(true);
 
 	swiper_slide.querySelector(".section").setAttribute("menu-index", menu_index);
+
+	swiper_slide.querySelector(".section").setAttribute("data-history", data_history_name);
 
 	const parser = new DOMParser();
 	let html_content = parser.parseFromString(raw_html_content, 'text/html').body.childNodes;
@@ -90,9 +92,13 @@ Promise.all(all_raw_html_content).then((all_raw_html_content) => {
 
 	all_raw_html_content.forEach((raw_html_content, index) => {
 
-		const menu_index = content_files_paths[index].split("@")[0];
+		const data = content_files_paths[index].split("@");
 
-		append_content_slide(swiper_content, content_slide_template, raw_html_content, menu_index);
+		const menu_index = data[0];
+
+		const data_history_name = data[1].replace(".html", "");
+
+		append_content_slide(swiper_content, content_slide_template, raw_html_content, menu_index, data_history_name);
 
 	});
 
@@ -238,15 +244,29 @@ document.addEventListener("content-slides-created", () => {
 	});
 
 
-	enable_scroll_on_active_content_slide(scrollers, 0);
-
-
 });
 
 
 document.addEventListener("enable-scroll", (event) => {
 
-	enable_scroll_on_active_content_slide(scrollers, event.detail);
+	if(scrollers.length > 0){
+
+		enable_scroll_on_active_content_slide(scrollers, event.detail);
+
+	}
+	else {
+
+		const timer = setTimeout(() => {
+
+			clearTimeout(timer);
+
+			const chaining_event = new CustomEvent("enable-scroll", { detail: event.detail });
+
+			document.dispatchEvent(chaining_event);
+
+		}, 100);
+
+	}
 
 });
 // --------------- ↑ Content scrolling using locomotive scroll ↑ ---------------
