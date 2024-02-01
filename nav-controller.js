@@ -247,6 +247,9 @@ document.addEventListener("content-slides-created", () => {
 	// Showing the right content section when clicking on a menu item
 	// And set active the right menu/submenu
 
+	// Storing the glossary of menu index and the slide index they correspond to
+	const menus_index_lib = new Object();
+
 	Array.from(menu_level_1.querySelectorAll("li")).reduce((accumulator, menu_level_1_item, index) => {
 
 		const fixed_acc = accumulator;
@@ -260,6 +263,12 @@ document.addEventListener("content-slides-created", () => {
 		Array.from(menu_level_2.slides[index].querySelectorAll("li")).forEach((menu_level_2_item, index_2) => {
 
 			const fixed_acc = accumulator;
+
+
+			// ---
+			menus_index_lib[`${index + 1}.${index_2 + 1}`] = fixed_acc;
+			// ---
+
 
 			menu_level_2_item.addEventListener("click", () => {
 
@@ -275,6 +284,15 @@ document.addEventListener("content-slides-created", () => {
 
 	}, 0);
 
+
+
+	// Handling the buttons redirections
+	// menu_index : N.N, "1.4, "3.1" ...etc...
+	window.slide_to_on_button_click = function(menu_index) {
+
+		content.slideTo(menus_index_lib[menu_index], slide_to_timing);
+
+	}
 
 
 
