@@ -133,6 +133,7 @@
 /* ↓ --------- Text weight on hover --------- ↓ */
 :root {
 	--text-hover-weight: "wght" 500;
+	--text-max-width: 800px;
 }
 /* ↑ --------- Text weight on hover --------- ↑ */
 
@@ -226,6 +227,9 @@
 
 /*Desktop*/
 @media only screen and (min-width: 600px) {
+	.text {
+		max-width:var(--text-max-width);
+	}
 	.text.mili {
 		font-size: var(--font-size-mili);
 		line-height:var(--line-height-mili);
@@ -500,6 +504,22 @@ p.dim {
 }
 p.dim.is-inview {
 	opacity:1;
+}
+
+
+
+p.rollout {
+	clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+	transform: translateX(-200px);
+
+	transition-property: clip-path, transform;
+	transition-duration: var(--timing-triple);
+	transition-timing-function: var(--timing-curve-out);
+}
+
+p.rollout.is-inview {
+	clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%);
+	transform: translateX(0px);
 }
 /* ↑ --------- Focus text component --------- ↑ */
 
