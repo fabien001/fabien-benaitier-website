@@ -376,7 +376,7 @@
 	position:relative;
 }
 
-.picture .image::before {
+.picture .image::after {
 	content:"";
 	position:absolute;
 	left:0;
