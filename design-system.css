@@ -490,6 +490,17 @@ p.focus strong::before {
 p.focus.is-inview strong::before {
 	width:100%;
 }
+
+p.dim {
+	opacity:0.5;
+
+	transition-property: opacity;
+	transition-duration: var(--timing-base);
+	transition-timing-function: var(--timing-curve);
+}
+p.dim.is-inview {
+	opacity:1;
+}
 /* ↑ --------- Focus text component --------- ↑ */
 
 
