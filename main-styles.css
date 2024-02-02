@@ -327,6 +327,49 @@ body {
 
 
 
+/*---*/
+
+
+
+
+/*Mobile*/
+@media only screen and (max-width: 600px) {
+	#maslow-pyramid-ux img.desktop {
+		display:none;
+	}
+}
+/*Desktop*/
+@media only screen and (min-width: 600px) {
+	#maslow-pyramid-ux img.mobile {
+		display:none;
+	}
+}
+
+
+#maslow-pyramid-ux img {
+
+	transform: scale(2.0) rotateX(85deg);
+	transform-origin: top center;
+	filter:blur(10px);
+	opacity: 0;
+
+	transition-property: transform, opacity, filter;
+	transition-duration: var(--timing-triple);
+	transition-timing-function: var(--timing-curve);
+}
+
+#maslow-pyramid-ux.is-inview img {
+
+	transform: scale(1.0) rotateX(0deg);
+	transform-origin: top center;
+	filter:blur(0px);
+	opacity: 1;
+
+	transition-property: transform, opacity, filter;
+	transition-duration: var(--timing-triple);
+	transition-timing-function: var(--timing-curve);
+}
+
 
 /*---*/
 
