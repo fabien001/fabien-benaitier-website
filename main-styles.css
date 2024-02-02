@@ -380,6 +380,34 @@ body {
 
 /*Mobile*/
 @media only screen and (max-width: 600px) {
+	#this-website img.desktop {
+		display:none;
+	}
+}
+/*Desktop*/
+@media only screen and (min-width: 600px) {
+	#this-website img.mobile {
+		display:none;
+	}
+
+	#this-website img.desktop {
+		max-width: 1000px;
+	}
+}
+
+
+
+
+
+/*---*/
+
+
+
+
+
+
+/*Mobile*/
+@media only screen and (max-width: 600px) {
 	#result-driven {
 		font-size:var(--font-size-kilo);
 	}
