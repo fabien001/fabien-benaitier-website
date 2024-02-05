@@ -469,6 +469,15 @@ body {
 
 
 
+/*---*/
+
+/*Desktop*/
+@media only screen and (min-width: 600px) {
+	#conceptualize br {
+		display:none;
+	}
+}
+
 
 /* ↑ --------- Specific styling --------- ↑ */
 
