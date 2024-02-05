@@ -500,7 +500,7 @@ p.focus.is-inview strong::before {
 }
 
 p.dim {
-	opacity:0.5;
+	opacity:0.35;
 
 	transition-property: opacity;
 	transition-duration: var(--timing-base);
