@@ -338,12 +338,16 @@
 
 
 
-/* ↓ --------- Picture components --------- ↓ */
-.picture {
-
+/* ↓ --------- Picture & figma embed components --------- ↓ */
+.figma-embed iframe {
+	border:1px solid var(--color-primary);
+	outline:none;
+	width:100%;
+	max-height:450px;
 }
 
-.picture .subtitle {
+
+.figma-embed .subtitle, .picture .subtitle {
 	position:relative;
 	z-index:2;
 
@@ -354,14 +358,14 @@
 	transition-duration: var(--timing-double);
 	transition-timing-function: var(--timing-curve);
 }
-.picture.is-inview .subtitle {
+.figma-embed .subtitle, .picture.is-inview .subtitle {
 	transform: translateX(0px);
 	opacity:1;
 }
 
 
 
-.picture img {
+.figma-embed iframe, .picture img {
 	max-width: 100%;
 	clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
 
@@ -369,18 +373,18 @@
 	transition-duration: var(--timing-double);
 	transition-timing-function: var(--timing-curve);
 }
-.picture.is-inview img {
+.figma-embed iframe, .picture.is-inview img {
 	clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%);
 }
 
 
 
-.picture .image {
+.figma-embed iframe, .picture .image {
 	display:block;
 	position:relative;
 }
 
-.picture .image::after {
+.figma-embed iframe::after, .picture .image::after {
 	content:"";
 	position:absolute;
 	left:0;
@@ -399,54 +403,54 @@
 /*1.55 coeff*/
 /*Mobile*/
 @media only screen and (max-width: 600px) {
-	.picture .subtitle.tera {
+	.figma-embed .subtitle.tera, .picture .subtitle.tera {
 		margin-bottom: -3.85rem;
 	}
-	.picture .subtitle.giga {
+	.figma-embed .subtitle.giga, .picture .subtitle.giga {
 		margin-bottom: -3.5rem;
 	}
-	.picture .subtitle.mega {
+	.figma-embed .subtitle.mega, .picture .subtitle.mega {
 		margin-bottom: -2.86rem;
 	}
-	.picture .subtitle.kilo {
+	.figma-embed .subtitle.kilo, .picture .subtitle.kilo {
 		margin-bottom: -2.3rem;
 	}
-	.picture .subtitle.deci {
+	.figma-embed .subtitle.deci, .picture .subtitle.deci {
 		margin-bottom: -1.3rem;
 	}
-	.picture .subtitle.centi {
+	.figma-embed .subtitle.centi, .picture .subtitle.centi {
 		margin-bottom: -0.95rem;
 	}
-	.picture .subtitle.mili {
+	.figma-embed .subtitle.mili, .picture .subtitle.mili {
 		margin-bottom: -0.65rem;
 	}
 }
 
 /*Desktop*/
 @media only screen and (min-width: 600px) {
-	.picture .subtitle.tera {
+	.figma-embed .subtitle.tera, .picture .subtitle.tera {
 		margin-bottom: -5.75rem;
 	}
-	.picture .subtitle.giga {
+	.figma-embed .subtitle.giga, .picture .subtitle.giga {
 		margin-bottom: -5.25rem;
 	}
-	.picture .subtitle.mega {
+	.figma-embed .subtitle.mega, .picture .subtitle.mega {
 		margin-bottom: -4.3rem;
 	}
-	.picture .subtitle.kilo {
+	.figma-embed .subtitle.kilo, .picture .subtitle.kilo {
 		margin-bottom: -3.9rem;
 	}
-	.picture .subtitle.deci {
+	.figma-embed .subtitle.deci, .picture .subtitle.deci {
 		margin-bottom: -1.9rem;
 	}
-	.picture .subtitle.centi {
+	.figma-embed .subtitle.centi, .picture .subtitle.centi {
 		margin-bottom: -1.45rem;
 	}
-	.picture .subtitle.mili {
+	.figma-embed .subtitle.mili, .picture .subtitle.mili {
 		margin-bottom: -0.95rem;
 	}
 }
-/* ↑ --------- Picture components --------- ↑ */
+/* ↑ --------- Picture & figma embed components --------- ↑ */
 
 
 
@@ -733,18 +737,6 @@ p.rollout.is-inview {
 	clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
 }
 /* ↑ --------- Read next component --------- ↑ */
-
-
-
-
-
-
-
-
-
-/* ↓ --------- Animations --------- ↓ */
-
-/* ↑ --------- Animations --------- ↑ */
 
 
 
