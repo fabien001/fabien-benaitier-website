@@ -93,13 +93,13 @@
 
 
 		/* line-height = 1.75*font-size */
-		--line-height-tera: 10.5rem;
-		--line-height-giga: 9.625rem;
-		--line-height-mega: 7.875rem;
-		--line-height-kilo: 6.125rem;
-		--line-height-deci: 3.5rem;
-		--line-height-centi: 2.625rem;
-		--line-height-mili: 1.75rem;
+		--line-height-tera: 10.5rem; /*96px*/
+		--line-height-giga: 9.625rem; /*96px*/
+		--line-height-mega: 7.875rem; /*96px*/
+		--line-height-kilo: 6.125rem; /*96px*/
+		--line-height-deci: 3.5rem; /*96px*/
+		--line-height-centi: 2.625rem; /*96px*/
+		--line-height-mili: 1.75rem; /*96px*/
 	}
 }
 
@@ -107,23 +107,23 @@
 /*Desktop*/
 @media only screen and (min-width: 600px) {
 	:root {
-		--font-size-tera: 9rem;
-		--font-size-giga: 8.25rem;
-		--font-size-mega: 6.75rem;
-		--font-size-kilo: 6rem; /*96px*/ /*-61px 3.8125rem*/
-		--font-size-deci: 3rem; /*48px*/ /*-31px 1.9375rem*/ 
-		--font-size-centi: 2.25rem; /*1.4516rem*/
-		--font-size-mili: 1.5rem;
+		--font-size-tera: 9rem; /*144px*/
+		--font-size-giga: 8.25rem; /*132px*/
+		--font-size-mega: 6.75rem; /*108px*/
+		--font-size-kilo: 6rem; /*96px*/
+		--font-size-deci: 3rem; /*48px*/
+		--font-size-centi: 2.25rem; /*36px*/
+		--font-size-mili: 1.5rem; /*24px*/
 
 
 		/* line-height = 1.75*font-size */
 		--line-height-tera: 15.75rem; /*252px*/
-		--line-height-giga: 14.4375rem; 
-		--line-height-mega: 11.8125rem;
+		--line-height-giga: 14.4375rem; /*231px*/
+		--line-height-mega: 11.8125rem; /*189px*/
 		--line-height-kilo: 10.5rem; /*168px*/
 		--line-height-deci: 5.25rem; /*84px*/
-		--line-height-centi: 3.9375rem;
-		--line-height-mili: 2.625rem;
+		--line-height-centi: 3.9375rem; /*63px*/
+		--line-height-mili: 2.625rem; /*42px*/
 	}
 }
 /* ↑ --------- Text sizes --------- ↑ */
