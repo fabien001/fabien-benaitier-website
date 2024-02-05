@@ -358,7 +358,7 @@
 	transition-duration: var(--timing-double);
 	transition-timing-function: var(--timing-curve);
 }
-.figma-embed .subtitle, .picture.is-inview .subtitle {
+.figma-embed.is-inview .subtitle, .picture.is-inview .subtitle {
 	transform: translateX(0px);
 	opacity:1;
 }
@@ -373,7 +373,7 @@
 	transition-duration: var(--timing-double);
 	transition-timing-function: var(--timing-curve);
 }
-.figma-embed iframe, .picture.is-inview img {
+.figma-embed.is-inview iframe, .picture.is-inview img {
 	clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%);
 }
 
