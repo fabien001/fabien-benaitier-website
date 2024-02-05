@@ -144,6 +144,40 @@ const enable_scroll_on_active_content_slide = function(scrollers, content_slide_
 
 
 
+
+
+// Getting all children elements when a content page is wrapped in data-scroll-sections
+function get_children_elements(root_element) {
+
+  const level_one_children = [];
+  
+  // Get all root elements
+  const root_elements = root_element.children;
+  
+  // Loop through each root element
+  for (let i = 0; i < root_elements.length; i++) {
+
+    const root = root_elements[i];
+    
+    // Get level-1 children of current root element
+    const children = root.children;
+
+    for (let j = 0; j < children.length; j++) {
+
+      level_one_children.push(children[j]);
+
+    }
+
+  }
+  
+  return level_one_children;
+}
+
+
+
+
+
+
 // Resetting the scroll to the top
 const reset_scroll = function(scroller) {
 
@@ -159,7 +193,20 @@ const reset_scroll = function(scroller) {
 
 						clearTimeout(timer);
 
-						Array.from(scroller.el.children).forEach((elem) => {
+						let elements;
+
+						if( scroller.el.querySelector("[data-scroll-section]") ){
+
+							elements = get_children_elements(scroller.el);
+
+						}
+						else {
+
+							elements = Array.from(scroller.el.children);
+
+						}
+
+						elements.forEach((elem) => {
 
 							elem.classList.remove("is-inview");
 
