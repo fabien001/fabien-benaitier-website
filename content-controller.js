@@ -1,3 +1,5 @@
+const scrollers = [];
+
 // Javascript controller for content scrolling
 window.addEventListener("load", () => {
 
@@ -28,6 +30,20 @@ const content_files_paths = [
 	"5.4@paper-portfolio.html"
 
 ];
+
+
+
+
+// Locomotive scroll config vars
+const locomotive_lerp = 0.1;
+const locomotive_duration = 1.2;
+const locomotive_smoothWheel = true;
+const locomotive_smoothTouch = true;
+const locomotive_wheelMultiplier = 0.75;
+const locomotive_touchMultiplier = 1.5;
+const locomotive_normalizeWheel = true;
+
+
 
 
 // --------------- ↓ Creating content slides ↓ ---------------
@@ -119,7 +135,7 @@ const slide_next_event = new Event("slide-next");
 
 let already_triggered_next = false;
 
-const scrollers = [];
+
 
 
 
@@ -130,15 +146,15 @@ const enable_scroll_on_active_content_slide = function(scrollers, content_slide_
 
 		scroller.stop();
 
-		scroller.scrollbar_elem.style.visibility = "hidden";
+		// scroller.scrollbar_elem.style.visibility = "hidden";
 
 	});
 
-	scrollers[content_slide_index].update();
+	// scrollers[content_slide_index].update();
 
 	scrollers[content_slide_index].start();
 
-	scrollers[content_slide_index].scrollbar_elem.style.visibility = "visible";
+	// scrollers[content_slide_index].scrollbar_elem.style.visibility = "visible";
 
 }
 
@@ -181,43 +197,19 @@ function get_children_elements(root_element) {
 // Resetting the scroll to the top
 const reset_scroll = function(scroller) {
 
+
 	let timer = setTimeout(() => {
 
-    		clearTimeout(timer);
-
     		scroller.scrollTo("top", {
-				duration: 100,
-				callback: function(){
+    			immediate: true,
+    			force: true,
+    			lock: true,
+					onComplete: function(){
 
-					let timer = setTimeout(() => {
+						already_triggered_next = false;
 
-						clearTimeout(timer);
-
-						let elements;
-
-						if( scroller.el.querySelector("[data-scroll-section]") ){
-
-							elements = get_children_elements(scroller.el);
-
-						}
-						else {
-
-							elements = Array.from(scroller.el.children);
-
-						}
-
-						elements.forEach((elem) => {
-
-							elem.classList.remove("is-inview");
-
-						});
-
-					}, 110);
-
-					already_triggered_next = false;
-
-				}
-			});
+					}
+				});
 
     	}, 750);
 
@@ -251,14 +243,14 @@ document.addEventListener("reset-scroll", (event) => {
 
 
 
-const trigger_read_next = function(read_next_obj, scroller) {
+const trigger_read_next = function(read_next_obj, progress) {
 
-	const text_over_obj = read_next_obj.el.querySelector("p.text-over");
+	const text_over_obj = read_next_obj.querySelector("p.text-over");
 
     const progress_to_perc = 
     	Math.min(
         	(Math.round(
-        		((read_next_obj.progress * 100)/trigger_read_next_at_progress)
+        		((progress * 100)/trigger_read_next_at_progress)
         		*100
 			))
 			/100, 
@@ -279,39 +271,62 @@ const trigger_read_next = function(read_next_obj, scroller) {
 }
 
 
+
+
+
+
+
+
+window.addEventListener('progress_event', (event) => {
+
+    const read_next_obj = event.detail.target;
+
+    const read_next_progress = event.detail.progress;
+
+    trigger_read_next(read_next_obj, read_next_progress);
+
+});
+
+
+
 document.addEventListener("content-slides-created", () => {
 
 	Array.from(document.querySelectorAll('[data-scroll-container]')).forEach((scroll_container, index) => {
 
-		const scroller = new LocomotiveScroll({
-	            el: scroll_container,
-	            smooth: true,
-	            multiplier: 0.5,
-	            // offset: ["20%", "20%"],
-	            mobile: {
-	                breakpoint: 0
-	            },
-	            tablet: {
-	                breakpoint: 0
-	            }
-	    });
+		// Add a progress event trigger to all read-next elements
+		const read_next = scroll_container.querySelector(".read-next");
+
+		if(read_next) {
+
+			read_next.setAttribute("data-scroll-event-progress", "progress_event");
+
+		}
 
 
-	    scroller.scrollbar_elem = document.querySelectorAll(".c-scrollbar")[index];
 
+		// Add a data-scroll-repeat attribute to all data-scroll element to reset them
+		Array.from(scroll_container.querySelectorAll("[data-scroll]")).forEach((elem) => {
 
-		// Dealing with read next action on scroll
-	    scroller.on("scroll", (evt) => {
-
-			if(typeof evt.currentElements['read-next'] === 'object') {
-
-				const read_next_obj = evt.currentElements['read-next'];
-
-				trigger_read_next(read_next_obj, scroller);
-
-		    }
+			elem.setAttribute("data-scroll-repeat", "");
 
 		});
+
+
+
+		const scroller = new LocomotiveScroll({
+	            lenisOptions: {
+				        wrapper: scroll_container.parentNode.parentNode,
+				        content: scroll_container.parentNode,
+				        lerp: locomotive_lerp,
+				        duration: locomotive_duration,
+				        smoothWheel: locomotive_smoothWheel,
+				        smoothTouch: locomotive_smoothTouch,
+				        wheelMultiplier: locomotive_wheelMultiplier,
+				        touchMultiplier: locomotive_touchMultiplier,
+				        normalizeWheel: locomotive_normalizeWheel,
+				    }
+	    });
+
 
 	    scrollers.push(scroller);
 

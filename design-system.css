@@ -673,7 +673,7 @@ p.rollout.is-inview {
 /*Mobile*/
 @media only screen and (max-width: 600px) {
 	.bubble h3 {
-		margin-bottom: -0.8rem;
+		margin-bottom: -0.45rem;
 	}
 }
 
@@ -684,7 +684,7 @@ p.rollout.is-inview {
 	}
 
 	.bubble h3 {
-		margin-bottom: -1.1rem;
+		margin-bottom: -0.66rem;
 	}
 }
 
