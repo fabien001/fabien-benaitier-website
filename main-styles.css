@@ -342,6 +342,161 @@ body {
 	clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%);
 }
 
+
+
+
+/*---*/
+
+
+
+
+/*Mobile*/
+@media only screen and (max-width: 600px) {
+	#maslow-pyramid-ux img.desktop {
+		display:none;
+	}
+}
+/*Desktop*/
+@media only screen and (min-width: 600px) {
+	#maslow-pyramid-ux img.mobile {
+		display:none;
+	}
+}
+
+
+#maslow-pyramid-ux img {
+
+	transform: scale(2.0) rotateX(85deg);
+	transform-origin: top center;
+	filter:blur(10px);
+	opacity: 0;
+
+	transition-property: transform, opacity, filter;
+	transition-duration: var(--timing-triple);
+	transition-timing-function: var(--timing-curve);
+}
+
+#maslow-pyramid-ux.is-inview img {
+
+	transform: scale(1.0) rotateX(0deg);
+	transform-origin: top center;
+	filter:blur(0px);
+	opacity: 1;
+
+	transition-property: transform, opacity, filter;
+	transition-duration: var(--timing-triple);
+	transition-timing-function: var(--timing-curve);
+}
+
+
+/*---*/
+
+
+
+
+
+
+/*Mobile*/
+@media only screen and (max-width: 600px) {
+	#this-website img.desktop {
+		display:none;
+	}
+}
+/*Desktop*/
+@media only screen and (min-width: 600px) {
+	#this-website img.mobile {
+		display:none;
+	}
+
+	#this-website img.desktop {
+		max-width: 1000px;
+	}
+}
+
+
+
+
+
+/*---*/
+
+
+
+
+
+
+/*Mobile*/
+@media only screen and (max-width: 600px) {
+	#result-driven {
+		font-size:var(--font-size-kilo);
+	}
+}
+
+
+
+
+
+/*---*/
+
+
+/*Desktop*/
+@media only screen and (min-width: 600px) {
+	.picture #picture-watch {
+		max-width:600px;
+	}
+	
+}
+
+
+.picture #picture-watch {
+	width:100%;
+
+	background-repeat: no-repeat;
+
+	transition-property: all;
+	transition-duration: var(--timing-triple);
+	transition-timing-function: var(--timing-curve);
+}
+
+
+
+/*Desktop*/
+@media only screen and (min-width: 600px) {
+	.picture #picture-watch {
+		height:740px;
+		background-size: 100%;
+		background-position: 100% 50%;
+	}
+	.picture.is-inview #picture-watch {
+		background-size: 200%;
+		background-position: 100% 100%;
+	}
+}
+
+/*Mobile*/
+@media only screen and (max-width: 600px) {
+	.picture #picture-watch {
+		height:540px;
+		background-size: 100%;
+		background-position: 100% 100%;
+	}
+	.picture.is-inview #picture-watch {
+		background-size: 240%;
+		background-position: 100% 100%;
+	}
+}
+
+
+
+/*---*/
+
+/*Desktop*/
+@media only screen and (min-width: 600px) {
+	.line-break-mobile br {
+		display:none;
+	}
+}
+
+
 /* ↑ --------- Specific styling --------- ↑ */
 
 

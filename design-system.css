@@ -93,13 +93,13 @@
 
 
 		/* line-height = 1.75*font-size */
-		--line-height-tera: 10.5rem;
-		--line-height-giga: 9.625rem;
-		--line-height-mega: 7.875rem;
-		--line-height-kilo: 6.125rem;
-		--line-height-deci: 3.5rem;
-		--line-height-centi: 2.625rem;
-		--line-height-mili: 1.75rem;
+		--line-height-tera: 10.5rem; /*96px*/
+		--line-height-giga: 9.625rem; /*96px*/
+		--line-height-mega: 7.875rem; /*96px*/
+		--line-height-kilo: 6.125rem; /*96px*/
+		--line-height-deci: 3.5rem; /*96px*/
+		--line-height-centi: 2.625rem; /*96px*/
+		--line-height-mili: 1.75rem; /*96px*/
 	}
 }
 
@@ -107,23 +107,23 @@
 /*Desktop*/
 @media only screen and (min-width: 600px) {
 	:root {
-		--font-size-tera: 9rem;
-		--font-size-giga: 8.25rem;
-		--font-size-mega: 6.75rem;
-		--font-size-kilo: 6rem; /*96px*/ /*-61px 3.8125rem*/
-		--font-size-deci: 3rem; /*48px*/ /*-31px 1.9375rem*/ 
-		--font-size-centi: 2.25rem; /*1.4516rem*/
-		--font-size-mili: 1.5rem;
+		--font-size-tera: 9rem; /*144px*/
+		--font-size-giga: 8.25rem; /*132px*/
+		--font-size-mega: 6.75rem; /*108px*/
+		--font-size-kilo: 6rem; /*96px*/
+		--font-size-deci: 3rem; /*48px*/
+		--font-size-centi: 2.25rem; /*36px*/
+		--font-size-mili: 1.5rem; /*24px*/
 
 
 		/* line-height = 1.75*font-size */
 		--line-height-tera: 15.75rem; /*252px*/
-		--line-height-giga: 14.4375rem; 
-		--line-height-mega: 11.8125rem;
+		--line-height-giga: 14.4375rem; /*231px*/
+		--line-height-mega: 11.8125rem; /*189px*/
 		--line-height-kilo: 10.5rem; /*168px*/
 		--line-height-deci: 5.25rem; /*84px*/
-		--line-height-centi: 3.9375rem;
-		--line-height-mili: 2.625rem;
+		--line-height-centi: 3.9375rem; /*63px*/
+		--line-height-mili: 2.625rem; /*42px*/
 	}
 }
 /* ↑ --------- Text sizes --------- ↑ */
@@ -133,6 +133,7 @@
 /* ↓ --------- Text weight on hover --------- ↓ */
 :root {
 	--text-hover-weight: "wght" 500;
+	--text-max-width: 800px;
 }
 /* ↑ --------- Text weight on hover --------- ↑ */
 
@@ -226,6 +227,9 @@
 
 /*Desktop*/
 @media only screen and (min-width: 600px) {
+	.text {
+		max-width:var(--text-max-width);
+	}
 	.text.mili {
 		font-size: var(--font-size-mili);
 		line-height:var(--line-height-mili);
@@ -334,12 +338,16 @@
 
 
 
-/* ↓ --------- Picture components --------- ↓ */
-.picture {
-
+/* ↓ --------- Picture & figma embed components --------- ↓ */
+.figma-embed iframe {
+	border:1px solid var(--color-primary);
+	outline:none;
+	width:100%;
+	max-height:450px;
 }
 
-.picture .subtitle {
+
+.figma-embed .subtitle, .picture .subtitle {
 	position:relative;
 	z-index:2;
 
@@ -350,14 +358,14 @@
 	transition-duration: var(--timing-double);
 	transition-timing-function: var(--timing-curve);
 }
-.picture.is-inview .subtitle {
+.figma-embed.is-inview .subtitle, .picture.is-inview .subtitle {
 	transform: translateX(0px);
 	opacity:1;
 }
 
 
 
-.picture img {
+.figma-embed iframe, .picture img {
 	max-width: 100%;
 	clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
 
@@ -365,18 +373,18 @@
 	transition-duration: var(--timing-double);
 	transition-timing-function: var(--timing-curve);
 }
-.picture.is-inview img {
+.figma-embed.is-inview iframe, .picture.is-inview img {
 	clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%);
 }
 
 
 
-.picture .image {
+.figma-embed iframe, .picture .image {
 	display:block;
 	position:relative;
 }
 
-.picture .image::before {
+.figma-embed iframe::after, .picture .image::after {
 	content:"";
 	position:absolute;
 	left:0;
@@ -395,54 +403,54 @@
 /*1.55 coeff*/
 /*Mobile*/
 @media only screen and (max-width: 600px) {
-	.picture .subtitle.tera {
+	.figma-embed .subtitle.tera, .picture .subtitle.tera {
 		margin-bottom: -3.85rem;
 	}
-	.picture .subtitle.giga {
+	.figma-embed .subtitle.giga, .picture .subtitle.giga {
 		margin-bottom: -3.5rem;
 	}
-	.picture .subtitle.mega {
+	.figma-embed .subtitle.mega, .picture .subtitle.mega {
 		margin-bottom: -2.86rem;
 	}
-	.picture .subtitle.kilo {
-		margin-bottom: -2.2rem;
+	.figma-embed .subtitle.kilo, .picture .subtitle.kilo {
+		margin-bottom: -2.3rem;
 	}
-	.picture .subtitle.deci {
+	.figma-embed .subtitle.deci, .picture .subtitle.deci {
 		margin-bottom: -1.3rem;
 	}
-	.picture .subtitle.centi {
+	.figma-embed .subtitle.centi, .picture .subtitle.centi {
 		margin-bottom: -0.95rem;
 	}
-	.picture .subtitle.mili {
+	.figma-embed .subtitle.mili, .picture .subtitle.mili {
 		margin-bottom: -0.65rem;
 	}
 }
 
 /*Desktop*/
 @media only screen and (min-width: 600px) {
-	.picture .subtitle.tera {
+	.figma-embed .subtitle.tera, .picture .subtitle.tera {
 		margin-bottom: -5.75rem;
 	}
-	.picture .subtitle.giga {
+	.figma-embed .subtitle.giga, .picture .subtitle.giga {
 		margin-bottom: -5.25rem;
 	}
-	.picture .subtitle.mega {
+	.figma-embed .subtitle.mega, .picture .subtitle.mega {
 		margin-bottom: -4.3rem;
 	}
-	.picture .subtitle.kilo {
-		margin-bottom: -3.8rem;
+	.figma-embed .subtitle.kilo, .picture .subtitle.kilo {
+		margin-bottom: -3.9rem;
 	}
-	.picture .subtitle.deci {
+	.figma-embed .subtitle.deci, .picture .subtitle.deci {
 		margin-bottom: -1.9rem;
 	}
-	.picture .subtitle.centi {
+	.figma-embed .subtitle.centi, .picture .subtitle.centi {
 		margin-bottom: -1.45rem;
 	}
-	.picture .subtitle.mili {
+	.figma-embed .subtitle.mili, .picture .subtitle.mili {
 		margin-bottom: -0.95rem;
 	}
 }
-/* ↑ --------- Picture components --------- ↑ */
+/* ↑ --------- Picture & figma embed components --------- ↑ */
 
 
 
@@ -489,6 +497,33 @@ p.focus strong::before {
 
 p.focus.is-inview strong::before {
 	width:100%;
+}
+
+p.dim {
+	opacity:0.35;
+
+	transition-property: opacity;
+	transition-duration: var(--timing-base);
+	transition-timing-function: var(--timing-curve);
+}
+p.dim.is-inview {
+	opacity:1;
+}
+
+
+
+p.rollout {
+	clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+	transform: translateX(-200px);
+
+	transition-property: clip-path, transform;
+	transition-duration: var(--timing-triple);
+	transition-timing-function: var(--timing-curve-out);
+}
+
+p.rollout.is-inview {
+	clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%);
+	transform: translateX(0px);
 }
 /* ↑ --------- Focus text component --------- ↑ */
 
@@ -702,18 +737,6 @@ p.focus.is-inview strong::before {
 	clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
 }
 /* ↑ --------- Read next component --------- ↑ */
-
-
-
-
-
-
-
-
-
-/* ↓ --------- Animations --------- ↓ */
-
-/* ↑ --------- Animations --------- ↑ */
 
 
 

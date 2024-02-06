@@ -1,4 +1,5 @@
 // Javascript controller for menus and navigation
+window.addEventListener("load", () => {
 
 
 // The timing for swipers sliding to a slide
@@ -149,6 +150,60 @@ menus.forEach( (menu) => {
 
 
 // ---------------- ↓ Content swiper controller ↓ ----------------
+const send_event = function(event_name, event_data = null){
+
+	const event = new CustomEvent(event_name, { detail: event_data });
+
+	document.dispatchEvent(event);
+
+}
+
+
+
+
+const avoid_flicker_effect = function(content_swiper_obj, prev_slide_index, current_slide_index, next_slide_index){
+
+		// Setting all slides to a 0 opacity except the 2 transitioning
+		content_swiper_obj.slides.forEach((slide) => {
+
+			slide.style.visibility = "hidden";
+
+		});
+
+		content_swiper_obj.slides[prev_slide_index].style.visibility = "visible";
+		content_swiper_obj.slides[current_slide_index].style.visibility = "visible";
+
+		if( next_slide_index ){
+			content_swiper_obj.slides[next_slide_index].style.visibility = "visible";
+		}
+
+}
+
+
+
+
+const slide_change = function(content_swiper_obj, menu_level_1, menu_level_2) {
+
+	const menu_submenu_index = content_swiper_obj.slides[content_swiper_obj.activeIndex].getAttribute("menu-index");
+
+	set_active_menus(menu_level_1, menu_level_2, menu_submenu_index);
+
+
+	// Avoid having slides that move in the background
+	const current_slide_index = content_swiper_obj.activeIndex ? content_swiper_obj.activeIndex : 0;
+
+	const prev_slide_index = content_swiper_obj.previousIndex ? content_swiper_obj.previousIndex : 0;
+
+	avoid_flicker_effect(content_swiper_obj, prev_slide_index, current_slide_index);
+
+	send_event("enable-scroll", current_slide_index);
+
+	send_event("reset-scroll", prev_slide_index);
+
+}
+
+
+
 // Activate the content swiper only when all content is fetch and slides created
 document.addEventListener("content-slides-created", () => {
 
@@ -156,6 +211,7 @@ document.addEventListener("content-slides-created", () => {
 
 		direction: "horizontal",
 		slidesPerView: 1,
+		loop: true,
 		mousewheel: {
 			forceToAxis: true,
 			sensitivity: 5,
@@ -170,53 +226,26 @@ document.addEventListener("content-slides-created", () => {
 	          translate: ["100%", 0, 0]
 	        },
 	    },
-	    nested: true
+	    nested: true,
+     	history: {
+     		enabled: true,
+        	key: ""
+      	},
+      	on: {
+      		afterInit: function(){
+
+      			slide_change(this, menu_level_1, menu_level_2);
+
+      		}
+      	}
 	});
-
-
-
-
-
-	const avoid_flicker_effect = function(swiper_obj, prev_slide_index, current_slide_index, next_slide_index){
-
-		// Setting all slides to a 0 opacity except the 2 transitioning
-		swiper_obj.slides.forEach((slide) => {
-
-			slide.style.visibility = "hidden";
-
-		});
-
-		swiper_obj.slides[prev_slide_index].style.visibility = "visible";
-		swiper_obj.slides[current_slide_index].style.visibility = "visible";
-
-		if( next_slide_index ){
-			swiper_obj.slides[next_slide_index].style.visibility = "visible";
-		}
-
-	}
 
 
 
 
 	content.on("activeIndexChange", (event) => {
 
-		const menu_submenu_index = content.slides[content.activeIndex].getAttribute("menu-index");
-
-		set_active_menus(menu_level_1, menu_level_2, menu_submenu_index);
-
-
-		// Avoid having slides that move in the background
-		const current_slide_index = content.activeIndex ? content.activeIndex : 0;
-
-		const prev_slide_index = content.previousIndex ? content.previousIndex : 0;
-
-		avoid_flicker_effect(content, prev_slide_index, current_slide_index);
-
-
-
-		const enable_scroll_on_current_content_slide_event = new CustomEvent("enable-scroll", { detail: current_slide_index });
-
-		document.dispatchEvent(enable_scroll_on_current_content_slide_event);
+		slide_change(content, menu_level_1, menu_level_2);
 
 	});
 
@@ -231,11 +260,7 @@ document.addEventListener("content-slides-created", () => {
 
 		avoid_flicker_effect(content, prev_slide_index, current_slide_index, next_slide_index);
 
-
-
-		const enable_scroll_on_current_content_slide_event = new CustomEvent("enable-scroll", { detail: current_slide_index });
-
-		document.dispatchEvent(enable_scroll_on_current_content_slide_event);
+		send_event("enable-scroll", current_slide_index);
 
 	});
 
@@ -245,6 +270,9 @@ document.addEventListener("content-slides-created", () => {
 
 	// Showing the right content section when clicking on a menu item
 	// And set active the right menu/submenu
+
+	// Storing the glossary of menu index and the slide index they correspond to
+	const menus_index_lib = new Object();
 
 	Array.from(menu_level_1.querySelectorAll("li")).reduce((accumulator, menu_level_1_item, index) => {
 
@@ -260,6 +288,12 @@ document.addEventListener("content-slides-created", () => {
 
 			const fixed_acc = accumulator;
 
+
+			// ---
+			menus_index_lib[`${index + 1}.${index_2 + 1}`] = fixed_acc;
+			// ---
+
+
 			menu_level_2_item.addEventListener("click", () => {
 
 				content.slideTo(fixed_acc, slide_to_timing);
@@ -274,6 +308,15 @@ document.addEventListener("content-slides-created", () => {
 
 	}, 0);
 
+
+
+	// Handling the buttons redirections
+	// menu_index : N.N, "1.4, "3.1" ...etc...
+	window.slide_to_on_button_click = function(menu_index) {
+
+		content.slideTo(menus_index_lib[menu_index], slide_to_timing);
+
+	}
 
 
 
@@ -299,8 +342,4 @@ document.addEventListener("content-slides-created", () => {
 
 
 
-// Initiate the active menu
-set_active_menus(menu_level_1, menu_level_2, "1.1");
-
-
-
+});// End of page load event listener

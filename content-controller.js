@@ -1,5 +1,5 @@
 // Javascript controller for content scrolling
-
+window.addEventListener("load", () => {
 
 
 const content_files_paths = [
@@ -36,11 +36,13 @@ const swiper_content = document.querySelector(".swiper.content .swiper-wrapper")
 const content_slide_template = document.getElementById("content-slide-template");
 
 
-const append_content_slide = function(swiper_wrapper, template, raw_html_content, menu_index){
+const append_content_slide = function(swiper_wrapper, template, raw_html_content, menu_index, data_history_name){
 
 	const swiper_slide = template.content.cloneNode(true);
 
 	swiper_slide.querySelector(".section").setAttribute("menu-index", menu_index);
+
+	swiper_slide.querySelector(".section").setAttribute("data-history", data_history_name);
 
 	const parser = new DOMParser();
 	let html_content = parser.parseFromString(raw_html_content, 'text/html').body.childNodes;
@@ -50,14 +52,6 @@ const append_content_slide = function(swiper_wrapper, template, raw_html_content
 		swiper_slide.querySelector(".content-container").appendChild(node);
 
 	});
-
-
-	// Always adding an empty div with a certain height at the end of the scrollable content for locomotive scroll
-	// const add_height = document.createElement("div");
-	
-	// add_height.style.height = "100vh";
-
-	// swiper_slide.querySelector(".content-container").appendChild(add_height);
 
 	swiper_wrapper.appendChild(swiper_slide);
 
@@ -90,9 +84,13 @@ Promise.all(all_raw_html_content).then((all_raw_html_content) => {
 
 	all_raw_html_content.forEach((raw_html_content, index) => {
 
-		const menu_index = content_files_paths[index].split("@")[0];
+		const data = content_files_paths[index].split("@");
 
-		append_content_slide(swiper_content, content_slide_template, raw_html_content, menu_index);
+		const menu_index = data[0];
+
+		const data_history_name = data[1].replace(".html", "");
+
+		append_content_slide(swiper_content, content_slide_template, raw_html_content, menu_index, data_history_name);
 
 	});
 
@@ -132,37 +130,123 @@ const enable_scroll_on_active_content_slide = function(scrollers, content_slide_
 
 		scroller.stop();
 
+		scroller.scrollbar_elem.style.visibility = "hidden";
+
 	});
+
+	scrollers[content_slide_index].update();
 
 	scrollers[content_slide_index].start();
 
+	scrollers[content_slide_index].scrollbar_elem.style.visibility = "visible";
+
 }
+
+
+
+
+
+// Getting all children elements when a content page is wrapped in data-scroll-sections
+function get_children_elements(root_element) {
+
+  const level_one_children = [];
+  
+  // Get all root elements
+  const root_elements = root_element.children;
+  
+  // Loop through each root element
+  for (let i = 0; i < root_elements.length; i++) {
+
+    const root = root_elements[i];
+    
+    // Get level-1 children of current root element
+    const children = root.children;
+
+    for (let j = 0; j < children.length; j++) {
+
+      level_one_children.push(children[j]);
+
+    }
+
+  }
+  
+  return level_one_children;
+}
+
+
+
 
 
 
 // Resetting the scroll to the top
 const reset_scroll = function(scroller) {
 
-	scroller.scrollTo("top", {
-		duration: 100,
-		callback: function(){
+	let timer = setTimeout(() => {
 
-			const timer = setTimeout(() => {
+    		clearTimeout(timer);
 
-				Array.from(scroller.el.children).forEach((elem) => {
+    		scroller.scrollTo("top", {
+				duration: 100,
+				callback: function(){
 
-					elem.classList.remove("is-inview");
+					let timer = setTimeout(() => {
 
-				});
+						clearTimeout(timer);
 
-			}, 110);
+						let elements;
 
-			already_triggered_next = false;
+						if( scroller.el.querySelector("[data-scroll-section]") ){
 
-		}
-	});
+							elements = get_children_elements(scroller.el);
+
+						}
+						else {
+
+							elements = Array.from(scroller.el.children);
+
+						}
+
+						elements.forEach((elem) => {
+
+							elem.classList.remove("is-inview");
+
+						});
+
+					}, 110);
+
+					already_triggered_next = false;
+
+				}
+			});
+
+    	}, 750);
 
 }
+
+document.addEventListener("reset-scroll", (event) => {
+
+	const scroller = scrollers[event.detail];
+
+	if(scrollers.length > 0){
+
+		reset_scroll(scroller);
+
+	}
+	else {
+
+		const timer = setTimeout(() => {
+
+			clearTimeout(timer);
+
+			const chaining_event = new CustomEvent("reset-scroll", { detail: event.detail });
+
+			document.dispatchEvent(chaining_event);
+
+		}, 100);
+
+	}
+
+});
 
 
 
@@ -190,14 +274,6 @@ const trigger_read_next = function(read_next_obj, scroller) {
 
     	document.dispatchEvent(slide_next_event);
 
-    	const timer = setTimeout(() => {
-
-    		clearTimeout(timer);
-
-    		reset_scroll(scroller);
-
-    	}, 1500);
-
     }
 
 }
@@ -220,6 +296,10 @@ document.addEventListener("content-slides-created", () => {
 	            }
 	    });
 
+
+	    scroller.scrollbar_elem = document.querySelectorAll(".c-scrollbar")[index];
+
+
 		// Dealing with read next action on scroll
 	    scroller.on("scroll", (evt) => {
 
@@ -238,15 +318,34 @@ document.addEventListener("content-slides-created", () => {
 	});
 
 
-	enable_scroll_on_active_content_slide(scrollers, 0);
-
-
 });
 
 
 document.addEventListener("enable-scroll", (event) => {
 
-	enable_scroll_on_active_content_slide(scrollers, event.detail);
+	if(scrollers.length > 0){
+
+		enable_scroll_on_active_content_slide(scrollers, event.detail);
+
+	}
+	else {
+
+		const timer = setTimeout(() => {
+
+			clearTimeout(timer);
+
+			const chaining_event = new CustomEvent("enable-scroll", { detail: event.detail });
+
+			document.dispatchEvent(chaining_event);
+
+		}, 1000);
+
+	}
 
 });
 // --------------- ↑ Content scrolling using locomotive scroll ↑ ---------------
+
+
+
+
+});// End of page load event listener
