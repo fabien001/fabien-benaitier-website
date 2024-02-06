@@ -188,6 +188,7 @@ document.addEventListener("content-slides-created", () => {
 
 		direction: "horizontal",
 		slidesPerView: 1,
+		loop: true,
 		mousewheel: {
 			forceToAxis: true,
 			sensitivity: 5,
