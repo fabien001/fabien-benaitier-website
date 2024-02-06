@@ -212,6 +212,7 @@ document.addEventListener("content-slides-created", () => {
 		direction: "horizontal",
 		slidesPerView: 1,
 		loop: true,
+		noSwipingSelector: "iframe",
 		mousewheel: {
 			forceToAxis: true,
 			sensitivity: 5,
