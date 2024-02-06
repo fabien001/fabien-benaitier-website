@@ -513,16 +513,16 @@ p.dim.is-inview {
 
 
 p.rollout {
-	clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+	opacity:0;
 	transform: translateX(-200px);
 
-	transition-property: clip-path, transform;
+	transition-property: opacity, transform;
 	transition-duration: var(--timing-triple);
 	transition-timing-function: var(--timing-curve-out);
 }
 
 p.rollout.is-inview {
-	clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%);
+	opacity:1;
 	transform: translateX(0px);
 }
 /* ↑ --------- Focus text component --------- ↑ */
