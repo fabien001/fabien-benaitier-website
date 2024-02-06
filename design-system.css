@@ -365,7 +365,7 @@
 
 
 
-.figma-embed iframe, .picture img {
+/*.figma-embed iframe, .picture img {
 	max-width: 100%;
 	clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
 
@@ -375,7 +375,7 @@
 }
 .figma-embed.is-inview iframe, .picture.is-inview img {
 	clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%);
-}
+}*/
 
 
 
