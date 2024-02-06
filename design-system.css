@@ -365,17 +365,17 @@
 
 
 
-/*.figma-embed iframe, .picture img {
+.figma-embed iframe, .picture img {
 	max-width: 100%;
-	clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+	/*clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
 
 	transition-property: clip-path;
 	transition-duration: var(--timing-double);
-	transition-timing-function: var(--timing-curve);
+	transition-timing-function: var(--timing-curve);*/
 }
 .figma-embed.is-inview iframe, .picture.is-inview img {
-	clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%);
-}*/
+/*	clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%);*/
+}
 
 
 
@@ -499,17 +499,19 @@ p.focus.is-inview strong::before {
 	width:100%;
 }
 
-p.dim {
-	opacity:0.35;
 
-	transition-property: opacity;
-	transition-duration: var(--timing-base);
-	transition-timing-function: var(--timing-curve);
-}
-p.dim.is-inview {
-	opacity:1;
-}
+@media only screen and (min-width: 600px) {
+	p.dim {
+		opacity:0.35;
 
+		transition-property: opacity;
+		transition-duration: var(--timing-base);
+		transition-timing-function: var(--timing-curve);
+	}
+	p.dim.is-inview {
+		opacity:1;
+	}
+}
 
 
 p.rollout {
