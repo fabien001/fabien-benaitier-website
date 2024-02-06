@@ -291,46 +291,52 @@ window.addEventListener('progress_event', (event) => {
 
 document.addEventListener("content-slides-created", () => {
 
-	Array.from(document.querySelectorAll('[data-scroll-container]')).forEach((scroll_container, index) => {
+	const timer = setTimeout(() => {
 
-		// Add a progress event trigger to all read-next elements
-		const read_next = scroll_container.querySelector(".read-next");
+		clearTimeout(timer);
 
-		if(read_next) {
+		Array.from(document.querySelectorAll('[data-scroll-container]')).forEach((scroll_container, index) => {
 
-			read_next.setAttribute("data-scroll-event-progress", "progress_event");
+			// Add a progress event trigger to all read-next elements
+			const read_next = scroll_container.querySelector(".read-next");
 
-		}
+			if(read_next) {
+
+				read_next.setAttribute("data-scroll-event-progress", "progress_event");
+
+			}
 
 
 
-		// Add a data-scroll-repeat attribute to all data-scroll element to reset them
-		Array.from(scroll_container.querySelectorAll("[data-scroll]")).forEach((elem) => {
+			// Add a data-scroll-repeat attribute to all data-scroll element to reset them
+			Array.from(scroll_container.querySelectorAll("[data-scroll]")).forEach((elem) => {
 
-			elem.setAttribute("data-scroll-repeat", "");
+				elem.setAttribute("data-scroll-repeat", "");
+
+			});
+
+
+
+			const scroller = new LocomotiveScroll({
+		            lenisOptions: {
+					        wrapper: scroll_container.parentNode.parentNode,
+					        content: scroll_container.parentNode,
+					        lerp: locomotive_lerp,
+					        duration: locomotive_duration,
+					        smoothWheel: locomotive_smoothWheel,
+					        smoothTouch: locomotive_smoothTouch,
+					        wheelMultiplier: locomotive_wheelMultiplier,
+					        touchMultiplier: locomotive_touchMultiplier,
+					        normalizeWheel: locomotive_normalizeWheel,
+					    }
+		    });
+
+
+		    scrollers.push(scroller);
 
 		});
 
-
-
-		const scroller = new LocomotiveScroll({
-	            lenisOptions: {
-				        wrapper: scroll_container.parentNode.parentNode,
-				        content: scroll_container.parentNode,
-				        lerp: locomotive_lerp,
-				        duration: locomotive_duration,
-				        smoothWheel: locomotive_smoothWheel,
-				        smoothTouch: locomotive_smoothTouch,
-				        wheelMultiplier: locomotive_wheelMultiplier,
-				        touchMultiplier: locomotive_touchMultiplier,
-				        normalizeWheel: locomotive_normalizeWheel,
-				    }
-	    });
-
-
-	    scrollers.push(scroller);
-
-	});
+	}, 1000);// timeout end
 
 
 });
