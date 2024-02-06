@@ -338,7 +338,7 @@ document.addEventListener("enable-scroll", (event) => {
 
 			document.dispatchEvent(chaining_event);
 
-		}, 100);
+		}, 1000);
 
 	}
 

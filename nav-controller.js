@@ -311,9 +311,4 @@ document.addEventListener("content-slides-created", () => {
 
 
 
-// Initiate the active menu
-set_active_menus(menu_level_1, menu_level_2, "1.1");
-
-
-
 });// End of page load event listener
