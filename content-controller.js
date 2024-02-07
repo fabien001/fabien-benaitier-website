@@ -329,11 +329,11 @@ document.addEventListener("content-slides-created", () => {
 					        touchMultiplier: locomotive_touchMultiplier,
 					        normalizeWheel: locomotive_normalizeWheel,
 					    },
-					    scrollCallback: function({ scroll, limit, velocity, direction, progress }){
+					    // scrollCallback: function({ scroll, limit, velocity, direction, progress }){
 
-					    	console.log(limit);
+					    // 	console.log(limit);
 
-					    }
+					    // }
 		    });
 
 

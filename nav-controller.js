@@ -244,7 +244,7 @@ document.addEventListener("content-slides-created", () => {
 
 
 
-	content.on("activeIndexChange", (event) => {
+	content.on("realIndexChange", (event) => {
 
 		slide_change(content, menu_level_1, menu_level_2);
 
