@@ -33,7 +33,7 @@ const content_files_paths = [
 
 
 
-const fps = 100;
+const fps = 60;
 
 
 
