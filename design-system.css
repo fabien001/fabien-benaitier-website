@@ -557,17 +557,34 @@ p.rollout.is-inview {
 	color: var(--color-contrast-2);
 	font-variation-settings: "wght" 800;
 	letter-spacing: normal;
-	background: var(--color-primary);
 
-	clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
-
-	transition-property: clip-path, font-variation-settings, letter-spacing;
+	transition-property: font-variation-settings, letter-spacing;
 	transition-duration: var(--timing-double);
 	transition-timing-function: var(--timing-curve);
 }
 
-.button.is-inview {
-	clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%);
+.button::after {
+	content:"";
+	display:block;
+	position: absolute;
+	left:0;
+	top:0;
+	margin:0;
+	padding:0;
+	z-index:-1;
+
+	width:0%;
+	height:100%;
+
+	background: var(--color-primary);
+
+	transition-property: width;
+	transition-duration: var(--timing-double);
+	transition-timing-function: var(--timing-curve);
+}
+
+.button.is-inview::after {
+	width:100%;
 }
 
 .button:hover {
@@ -737,6 +754,10 @@ p.rollout.is-inview {
 .read-next p.text-over {
 	color: var(--color-contrast-2);
 	clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+
+	transition-duration: .1s;
+	transition-property: clip-path;
+	transition-timing-function: linear;
 }
 /* ↑ --------- Read next component --------- ↑ */
 

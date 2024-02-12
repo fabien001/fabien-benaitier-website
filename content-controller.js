@@ -33,15 +33,7 @@ const content_files_paths = [
 
 
 
-
-// Locomotive scroll config vars
-const locomotive_lerp = 0.1;
-const locomotive_duration = 1.2;
-const locomotive_smoothWheel = true;
-const locomotive_smoothTouch = true;
-const locomotive_wheelMultiplier = 0.75;
-const locomotive_touchMultiplier = 1.5;
-const locomotive_normalizeWheel = true;
+const fps = 100;
 
 
 
@@ -129,7 +121,7 @@ Promise.all(all_raw_html_content).then((all_raw_html_content) => {
 
 
 // --------------- ↓ Content scrolling using locomotive scroll ↓ ---------------
-const trigger_read_next_at_progress = 0.6;
+const trigger_read_next_at_progress = 0.7;
 
 const slide_next_event = new Event("slide-next");
 
@@ -146,15 +138,9 @@ const enable_scroll_on_active_content_slide = function(scrollers, content_slide_
 
 		scroller.stop();
 
-		// scroller.scrollbar_elem.style.visibility = "hidden";
-
 	});
 
-	// scrollers[content_slide_index].update();
-
-	scrollers[content_slide_index].start();
-
-	// scrollers[content_slide_index].scrollbar_elem.style.visibility = "visible";
+	scrollers[content_slide_index].restart();
 
 }
 
@@ -197,21 +183,9 @@ function get_children_elements(root_element) {
 // Resetting the scroll to the top
 const reset_scroll = function(scroller) {
 
+	scroller.stop();
 
-	let timer = setTimeout(() => {
-
-    		scroller.scrollTo("top", {
-    			immediate: true,
-    			force: true,
-    			lock: true,
-					onComplete: function(){
-
-						already_triggered_next = false;
-
-					}
-				});
-
-    	}, 750);
+	already_triggered_next = false;
 
 }
 
@@ -315,27 +289,10 @@ document.addEventListener("content-slides-created", () => {
 
 			});
 
-
-
-			const scroller = new LocomotiveScroll({
-		            lenisOptions: {
-					        wrapper: scroll_container.parentNode.parentNode,
-					        content: scroll_container.parentNode,
-					        lerp: locomotive_lerp,
-					        duration: locomotive_duration,
-					        smoothWheel: locomotive_smoothWheel,
-					        smoothTouch: locomotive_smoothTouch,
-					        wheelMultiplier: locomotive_wheelMultiplier,
-					        touchMultiplier: locomotive_touchMultiplier,
-					        normalizeWheel: locomotive_normalizeWheel,
-					    },
-					    // scrollCallback: function({ scroll, limit, velocity, direction, progress }){
-
-					    // 	console.log(limit);
-
-					    // }
-		    });
-
+				const scroller = new LocomotiveV6({
+					root_element: scroll_container.parentNode,
+					fps: fps
+				});
 
 		    scrollers.push(scroller);
 
