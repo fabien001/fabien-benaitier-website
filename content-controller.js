@@ -298,7 +298,7 @@ document.addEventListener("content-slides-created", () => {
 
 		});
 
-	}, 1000);// timeout end
+	}, 200);// timeout end
 
 
 });
@@ -321,7 +321,7 @@ document.addEventListener("enable-scroll", (event) => {
 
 			document.dispatchEvent(chaining_event);
 
-		}, 1000);
+		}, 400);
 
 	}
 
