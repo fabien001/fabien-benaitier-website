@@ -115,7 +115,9 @@ class LocomotiveV6 {
 
 	            elem.is_inview = true;
 
-	            elem.y_start = entries[0].boundingClientRect.y;
+	            elem.scroll_delta = elem.scroll_delta || 0;
+
+	            elem.y_start = elem.scroll_delta + this.#get_relative_offset(elem, this.#scroll_container);
 
 	        }
 	        else {
@@ -128,11 +130,11 @@ class LocomotiveV6 {
 
 	        }
 
-	        if(elem.hasAttribute("data-scroll-speed")){
+	        // if(elem.hasAttribute("data-scroll-speed")){
 
-	        	elem.style.transform = "translateY(0px)";
+	        // 	elem.style.transform = "translateY(0px)";
 
-	        }
+	        // }
 
 	}
 
@@ -182,7 +184,11 @@ class LocomotiveV6 {
 		    };
 
 
-		    let observer = new IntersectionObserver(this.#intersection_callback, options);
+		    let observer = new IntersectionObserver((entries) => {
+
+		    	this.#intersection_callback(entries);
+
+		    }, options);
 
 			observer.observe(elem);
 
@@ -212,6 +218,19 @@ class LocomotiveV6 {
 
 	}
 
+	#get_relative_offset(target_element, parent_element) {
+
+		return target_element.getBoundingClientRect().y - parent_element.getBoundingClientRect().y;
+
+	}
+
+	// Determines if there is a collision with downward scrolling element, to prevent glitchy overlaps
+	#is_there_collision(elem) {
+
+		
+
+	}
+
 	#trigger_parallax(elements = []){
 
 	    
@@ -222,23 +241,26 @@ class LocomotiveV6 {
 	                parseInt(elem.getAttribute("data-scroll-speed"))
 	            );
 
-	        const y_current = elem.getBoundingClientRect().y;
+	        const y_current = this.#get_relative_offset(elem, this.#scroll_container);
 
 	        const scroll_delta = 
-	            (elem.y_start - y_current)
-	            /10
-	            *parallax_coeff;
+	        	Math.round(
+		        	Math.max(
+			            (elem.y_start - y_current)
+			            /10
+			            *parallax_coeff,
+			            0
+		            )
+		            *100
+	            )
+	            /100;
+
+            elem.scroll_delta = scroll_delta;
 
 	        elem.style.transform = `translateY(${scroll_delta}px)`;
 
 
 	    });
-
-	}
-
-	#get_relative_offset(target_element, parent_element) {
-
-		return target_element.getBoundingClientRect().y - parent_element.getBoundingClientRect().y;
 
 	}
 
