@@ -249,19 +249,19 @@ document.addEventListener("content-slides-created", () => {
 	});
 
 
-	content.on("setTransition", (event) => {
+	// content.on("setTransition", (event) => {
 
-		const current_slide_index = content.activeIndex;
+	// 	const current_slide_index = content.activeIndex;
 
-		const prev_slide_index = (current_slide_index - 1) >= 0 ? current_slide_index - 1 : 0;
+	// 	const prev_slide_index = (current_slide_index - 1) >= 0 ? current_slide_index - 1 : 0;
 
-		const next_slide_index = (current_slide_index + 1) <= (content.slides.length - 1) ? current_slide_index + 1 : current_slide_index;
+	// 	const next_slide_index = (current_slide_index + 1) <= (content.slides.length - 1) ? current_slide_index + 1 : current_slide_index;
 
-		avoid_flicker_effect(content, prev_slide_index, current_slide_index, next_slide_index);
+	// 	avoid_flicker_effect(content, prev_slide_index, current_slide_index, next_slide_index);
 
-		send_event("enable-scroll", current_slide_index);
+	// 	send_event("enable-scroll", current_slide_index);
 
-	});
+	// });
 
 
 
@@ -329,7 +329,16 @@ document.addEventListener("content-slides-created", () => {
 
 	document.addEventListener("slide-next", () => {
 
-		content.slideNext(slide_to_timing);
+		if( content.activeIndex == (content.slides.length - 1) ){
+
+			content.slideTo(menus_index_lib["1.1"], slide_to_timing);
+
+		}
+		else {
+
+			content.slideNext(slide_to_timing);
+
+		}
 
 	});
 

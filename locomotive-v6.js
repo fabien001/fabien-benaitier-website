@@ -242,7 +242,15 @@ class LocomotiveV6 {
 
 	#get_relative_offset(target_element, parent_element) {
 
-		return target_element.getBoundingClientRect().y - parent_element.getBoundingClientRect().y;
+		let relative_offset = 0;
+
+		if(target_element && parent_element){
+
+			relative_offset = target_element.getBoundingClientRect().y - parent_element.getBoundingClientRect().y;
+
+		}
+
+		return relative_offset;
 
 	}
 
@@ -250,7 +258,7 @@ class LocomotiveV6 {
 
 		let next_sibling = elem.nextSibling;
 
-		while( next_sibling.childNodes.length == 0 ){
+		while( next_sibling && next_sibling.childNodes.length == 0 ){
 
 			next_sibling = next_sibling.nextSibling;
 
@@ -393,6 +401,8 @@ class LocomotiveV6 {
 	// Public instance methods
 	stop() {
 
+		// console.log("stop", this.#scroll_container);
+
 		this.#toggle_scrollbar_visibility(false);
 
 		this.#refresh_enabled = false;
@@ -412,6 +422,8 @@ class LocomotiveV6 {
 	}
 
 	restart() {
+
+		// console.log("restart", this.#scroll_container);
 
 		this.#toggle_scrollbar_visibility(true);
 

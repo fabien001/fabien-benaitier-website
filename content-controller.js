@@ -146,6 +146,8 @@ const enable_scroll_on_active_content_slide = function(scrollers, content_slide_
 
 		});
 
+		already_triggered_next = false;
+
 	}, 750);
 
 	scrollers[content_slide_index].restart();
@@ -182,45 +184,6 @@ function get_children_elements(root_element) {
   
   return level_one_children;
 }
-
-
-
-
-
-
-// Resetting the scroll to the top
-const reset_scroll = function(scroller) {
-
-	scroller.stop();
-
-	already_triggered_next = false;
-
-}
-
-document.addEventListener("reset-scroll", (event) => {
-
-	const scroller = scrollers[event.detail];
-
-	if(scrollers.length > 0){
-
-		reset_scroll(scroller);
-
-	}
-	else {
-
-		const timer = setTimeout(() => {
-
-			clearTimeout(timer);
-
-			const chaining_event = new CustomEvent("reset-scroll", { detail: event.detail });
-
-			document.dispatchEvent(chaining_event);
-
-		}, 100);
-
-	}
-
-});
 
 
 
