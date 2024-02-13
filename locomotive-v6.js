@@ -40,6 +40,8 @@ class LocomotiveV6 {
 	#parallax_elems_transition_time = "0.1s";
 	#intersection_thresholds = 0.01;
 
+	#is_scrollbar_visible = false;
+
 	#refresh_enabled = true;
 
 	constructor(options) {
@@ -80,8 +82,6 @@ class LocomotiveV6 {
     		);
 
         }
-
-        this.#scroll_container.style.overflow = "auto";
 
         this.#fps_delay = 1000/this.#options.fps;
 
@@ -138,6 +138,25 @@ class LocomotiveV6 {
 	            elem.y_start = 0;
 
 	        }
+
+	}
+
+	#toggle_scrollbar_visibility(force) {
+
+		if( !this.#is_scrollbar_visible || force ) {
+
+			this.#scroll_container.style.overflowY = "auto";
+
+			this.#is_scrollbar_visible = true;
+
+		}
+		else {
+
+			this.#scroll_container.style.overflowY = "hidden";
+
+			this.#is_scrollbar_visible = false;
+
+		}
 
 	}
 
@@ -374,6 +393,8 @@ class LocomotiveV6 {
 	// Public instance methods
 	stop() {
 
+		this.#toggle_scrollbar_visibility(false);
+
 		this.#refresh_enabled = false;
 
 		this.#scroll_container.scrollTo({
@@ -391,6 +412,8 @@ class LocomotiveV6 {
 	}
 
 	restart() {
+
+		this.#toggle_scrollbar_visibility(true);
 
 		this.#refresh_enabled = true;
 

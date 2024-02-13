@@ -198,8 +198,6 @@ const slide_change = function(content_swiper_obj, menu_level_1, menu_level_2) {
 
 	send_event("enable-scroll", current_slide_index);
 
-	send_event("reset-scroll", prev_slide_index);
-
 }
 
 

@@ -134,11 +134,19 @@ let already_triggered_next = false;
 
 const enable_scroll_on_active_content_slide = function(scrollers, content_slide_index){
 
-	scrollers.forEach((scroller) => {
+	const timer = setTimeout(() => {
 
-		scroller.stop();
+		clearTimeout(timer);
 
-	});
+		scrollers.forEach((scroller, index) => {
+
+			if(content_slide_index == index){ return };
+
+			scroller.stop();
+
+		});
+
+	}, 750);
 
 	scrollers[content_slide_index].restart();
 
