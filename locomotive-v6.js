@@ -124,6 +124,10 @@ class LocomotiveV6 {
 
 	            elem.y_start = elem.scroll_delta + this.#get_relative_offset(elem, this.#scroll_container);
 
+	            elem.potential_collider = this.#find_next_not_empty_element(elem);
+
+	            elem.potential_collider_y = this.#get_relative_offset(elem.potential_collider, this.#scroll_container);
+
 	        }
 	        else {
 
@@ -238,51 +242,43 @@ class LocomotiveV6 {
 	}
 
 	// Determines if there is a collision with downward scrolling element, to prevent glitchy overlaps
-	#is_there_collision(elem, elem_y) {
+	#get_max_scroll_delta(elem) {
 
-		const potential_collider = this.#find_next_not_empty_element(elem);
+		const elem_real_y = elem.y_start + elem.offsetHeight;
 
-		const potential_collider_y = this.#get_relative_offset(potential_collider, this.#scroll_container);
+		const max_scroll_delta =
+			Math.max(
+				elem.potential_collider_y - elem_real_y,
+				0
+			);
 
-		const elem_collide_threshold_y = elem.offsetHeight + elem_y;
-
-		if( elem_collide_threshold_y >= potential_collider_y ){
-
-			return true;
-
-		}
-		else {
-
-			return false;
-
-		}
+		return max_scroll_delta
 
 	}
 
-	#trigger_parallax(elements = [], scroll_direction){
+	#trigger_parallax(elements = []){
 
 	    elements.forEach((elem) => {
 
 	        const y_current = this.#get_relative_offset(elem, this.#scroll_container);
 
-	        // Check for collision with downward element
-	    	if( this.#is_there_collision(elem, y_current) && scroll_direction < 0 ){
-
-	    		return;
-
-	    	};
+	        // Set max parallax value to not exceed next element position
+	    	const max_scroll_delta = this.#get_max_scroll_delta(elem);
 
 	        const scroll_delta = 
-	        	Math.round(
-		        	Math.max(
-			            (elem.y_start - y_current)
-			            /10
-			            *elem.parallax_coeff,
-			            0
+	        	Math.min(
+		        	Math.round(
+			        	Math.max(
+				            (elem.y_start - y_current)
+				            /10
+				            *elem.parallax_coeff,
+				            0
+			            )
+			            *100
 		            )
-		            *100
-	            )
-	            /100;
+		            /100,
+	            max_scroll_delta
+	            );
 
             elem.scroll_delta = scroll_delta;
 
@@ -328,15 +324,9 @@ class LocomotiveV6 {
 
 	}
 
-	// Returns negative (-1) scroll direction when scrolling down
-	#is_there_scroll_delta_and_scroll_direction(prev_scroll, current_scroll) {
+	#is_there_scroll_delta(prev_scroll, current_scroll) {
 
-		const scroll_delta = prev_scroll - current_scroll;
-
-	    return {
-	    	is_scroll_delta: scroll_delta != 0,
-	    	scroll_direction: Math.sign(scroll_delta)
-	    }
+	    return (prev_scroll - current_scroll) != 0;
 
 	}
 
@@ -351,12 +341,10 @@ class LocomotiveV6 {
 
 	    if( delay >= this.#fps_delay ){
 
-	    	const scroll_delta = this.#is_there_scroll_delta_and_scroll_direction(prev_scroll, current_scroll);
-
-	        if( scroll_delta.is_scroll_delta ){
+	        if( this.#is_there_scroll_delta(prev_scroll, current_scroll) ){
 
 	            // Launch anims here
-	            this.#trigger_parallax(this.#filter_parallax_elements(), scroll_delta.scroll_direction);
+	            this.#trigger_parallax(this.#filter_parallax_elements());
 
 	            this.#trigger_progress(this.#filter_progress_elements());
 
