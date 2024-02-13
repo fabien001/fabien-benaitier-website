@@ -223,12 +223,54 @@ class LocomotiveV6 {
 
 	}
 
-	#trigger_parallax(elements = []){
+	#find_next_not_empty_element(elem) {
 
-	    
+		let next_sibling = elem.nextSibling;
+
+		while( next_sibling.childNodes.length == 0 ){
+
+			next_sibling = next_sibling.nextSibling;
+
+		}
+
+		return next_sibling;
+
+	}
+
+	// Determines if there is a collision with downward scrolling element, to prevent glitchy overlaps
+	#is_there_collision(elem, elem_y) {
+
+		const potential_collider = this.#find_next_not_empty_element(elem);
+
+		const potential_collider_y = this.#get_relative_offset(potential_collider, this.#scroll_container);
+
+		const elem_collide_threshold_y = elem.offsetHeight + elem_y;
+
+		if( elem_collide_threshold_y >= potential_collider_y ){
+
+			return true;
+
+		}
+		else {
+
+			return false;
+
+		}
+
+	}
+
+	#trigger_parallax(elements = [], scroll_direction){
+
 	    elements.forEach((elem) => {
 
 	        const y_current = this.#get_relative_offset(elem, this.#scroll_container);
+
+	        // Check for collision with downward element
+	    	if( this.#is_there_collision(elem, y_current) && scroll_direction < 0 ){
+
+	    		return;
+
+	    	};
 
 	        const scroll_delta = 
 	        	Math.round(
@@ -286,9 +328,15 @@ class LocomotiveV6 {
 
 	}
 
-	#is_there_scroll_delta(prev_scroll, current_scroll) {
+	// Returns negative (-1) scroll direction when scrolling down
+	#is_there_scroll_delta_and_scroll_direction(prev_scroll, current_scroll) {
 
-	    return (prev_scroll - current_scroll) != 0;
+		const scroll_delta = prev_scroll - current_scroll;
+
+	    return {
+	    	is_scroll_delta: scroll_delta != 0,
+	    	scroll_direction: Math.sign(scroll_delta)
+	    }
 
 	}
 
@@ -303,10 +351,12 @@ class LocomotiveV6 {
 
 	    if( delay >= this.#fps_delay ){
 
-	        if( this.#is_there_scroll_delta(prev_scroll, current_scroll) ){
+	    	const scroll_delta = this.#is_there_scroll_delta_and_scroll_direction(prev_scroll, current_scroll);
+
+	        if( scroll_delta.is_scroll_delta ){
 
 	            // Launch anims here
-	            this.#trigger_parallax(this.#filter_parallax_elements());
+	            this.#trigger_parallax(this.#filter_parallax_elements(), scroll_delta.scroll_direction);
 
 	            this.#trigger_progress(this.#filter_progress_elements());
 
