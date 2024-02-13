@@ -101,6 +101,11 @@ class LocomotiveV6 {
 		parallax_elem.style.transitionTimingFunction = "linear";
 		parallax_elem.style.transitionDuration = this.#parallax_elems_transition_time;
 
+		parallax_elem.parallax_coeff =
+	        Math.abs(
+	            parseInt(parallax_elem.getAttribute("data-scroll-speed"))
+	        );
+
 	}
 
 	#intersection_callback(entries){
@@ -129,12 +134,6 @@ class LocomotiveV6 {
 	            elem.y_start = 0;
 
 	        }
-
-	        // if(elem.hasAttribute("data-scroll-speed")){
-
-	        // 	elem.style.transform = "translateY(0px)";
-
-	        // }
 
 	}
 
@@ -224,22 +223,10 @@ class LocomotiveV6 {
 
 	}
 
-	// Determines if there is a collision with downward scrolling element, to prevent glitchy overlaps
-	#is_there_collision(elem) {
-
-		
-
-	}
-
 	#trigger_parallax(elements = []){
 
 	    
 	    elements.forEach((elem) => {
-
-	        const parallax_coeff = 
-	            Math.abs(
-	                parseInt(elem.getAttribute("data-scroll-speed"))
-	            );
 
 	        const y_current = this.#get_relative_offset(elem, this.#scroll_container);
 
@@ -248,7 +235,7 @@ class LocomotiveV6 {
 		        	Math.max(
 			            (elem.y_start - y_current)
 			            /10
-			            *parallax_coeff,
+			            *elem.parallax_coeff,
 			            0
 		            )
 		            *100
