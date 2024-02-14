@@ -44,6 +44,8 @@ class LocomotiveV6 {
 
 	#refresh_enabled = true;
 
+	#is_started = false;
+
 	constructor(options) {
 
 		this.#options = Object.assign(
@@ -239,13 +241,15 @@ class LocomotiveV6 {
 
 		});
 
+		this.#is_started = true;
+
 	}
 
-	#filter_parallax_elements() {
+	#filter_parallax_elements(dont_care_if_inview = false) {
 
 	     return this.#scroll_elems.filter((elem) => {
 
-	        return elem.is_inview && elem.hasAttribute("data-scroll-speed");
+	        return (elem.is_inview || dont_care_if_inview) && elem.hasAttribute("data-scroll-speed");
 
 	    });
 
@@ -418,6 +422,16 @@ class LocomotiveV6 {
 
 	}
 
+	#reset_parallax_elements() {
+
+		this.#filter_parallax_elements(true).forEach((elem) => {
+
+			elem.style.transform = "";
+
+		});
+
+	}
+
 	// --------------------------------
 
 	// Public instance methods
@@ -425,7 +439,7 @@ class LocomotiveV6 {
 
 	stop() {
 
-		// console.log("stop", this.#scroll_container);
+		if( !this.#is_started ){ return };
 
 		this.#toggle_scrollbar_visibility(false);
 
@@ -443,11 +457,15 @@ class LocomotiveV6 {
 
 		});
 
+		this.#reset_parallax_elements();
+
+		this.#is_started = false;
+
 	}
 
 	restart() {
 
-		// console.log("restart", this.#scroll_container);
+		if( this.#is_started ){ return };
 
 		this.#toggle_scrollbar_visibility(true);
 
@@ -464,6 +482,8 @@ class LocomotiveV6 {
 			this.#trigger_frame();
 
 		});
+
+		this.#is_started = true;
 
 	}
 
