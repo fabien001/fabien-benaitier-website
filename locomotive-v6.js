@@ -108,6 +108,25 @@ class LocomotiveV6 {
 
 	}
 
+	// Handles elements with data-scroll-call attribute
+	#call_event_on_entry(elem) {
+
+		if( elem.hasAttribute("data-scroll-call") ) {
+
+			const event_name = elem.getAttribute("data-scroll-call");
+
+			const call_event = new CustomEvent(event_name, {detail: 
+
+				{target: elem}
+
+			});
+
+			window.dispatchEvent(call_event);
+
+		}
+
+	}
+
 	#intersection_callback(entries){
 
 	        const elem = entries[0].target;
@@ -127,6 +146,8 @@ class LocomotiveV6 {
 	            elem.potential_collider = this.#find_next_not_empty_element(elem);
 
 	            elem.potential_collider_y = this.#get_relative_offset(elem.potential_collider, this.#scroll_container);
+
+	            this.#call_event_on_entry(elem);
 
 	        }
 	        else {
@@ -397,8 +418,11 @@ class LocomotiveV6 {
 
 	}
 
+	// --------------------------------
 
 	// Public instance methods
+
+
 	stop() {
 
 		// console.log("stop", this.#scroll_container);
