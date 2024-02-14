@@ -500,17 +500,15 @@ p.focus.is-inview strong::before {
 }
 
 
-@media only screen and (min-width: 600px) {
-	p.dim {
-		opacity:0.35;
+p.dim {
+	opacity:0.35;
 
-		transition-property: opacity;
-		transition-duration: var(--timing-base);
-		transition-timing-function: var(--timing-curve);
-	}
-	p.dim.is-inview {
-		opacity:1;
-	}
+	transition-property: opacity;
+	transition-duration: var(--timing-base);
+	transition-timing-function: var(--timing-curve);
+}
+p.dim.is-inview {
+	opacity:1;
 }
 
 
