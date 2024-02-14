@@ -10,4 +10,12 @@ window.addEventListener("figma_embed", (event) => {
 
 	iframe.setAttribute("src", data_src);
 
+	iframe.addEventListener("load", () => {
+
+		event.detail.target.classList.add("loaded");
+
+		iframe.removeEventListener("load", () => {});
+
+	});
+
 });

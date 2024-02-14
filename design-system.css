@@ -340,6 +340,7 @@
 
 /* ↓ --------- Picture & figma embed components --------- ↓ */
 .figma-embed iframe {
+	position:relative;
 	border:1px solid var(--color-primary);
 	outline:none;
 	width:100%;
@@ -397,6 +398,52 @@
 	background:var(--color-picture-gradient);
 	background-blend-mode: overlay;
 	opacity:0.3;
+}
+
+
+/* Figma embed loading anim */
+.figma-embed iframe {
+	background: linear-gradient(
+    90deg,
+    hsl(210, 15%, 88%),
+    hsl(210, 15%, 95%),
+    hsl(210, 15%, 88%)
+	);
+    background-size: 200%;
+  	animation: loader 1s infinite reverse;
+}
+.figma-embed {
+	position:relative;
+}
+.figma-embed::after {
+	content:"";
+	display: block;
+	position: absolute;
+
+	width:70px;
+	height:25px;
+	left:calc(50% - 35px);
+	top:calc(100% - 237.5px);
+	margin:0;
+	padding:0;
+
+	background-image:url("/assets/figma-logo.svg");
+	background-position:contain;
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+
+	opacity:0.5;
+}
+.figma-embed.loaded::after {
+	display:none;
+}
+@keyframes loader {
+  from {
+    background-position: -100% 0;
+  }
+  to {
+    background-position: 100% 0;
+  }
 }
 
 
