@@ -313,19 +313,19 @@ body {
 
 #diagram-business-users-technique img {
 	width: 100%;
-	transform: scale(2) rotate(30deg);
+	/*transform: scale(2) rotate(30deg);
 	filter:blur(10px);
 	opacity: 0;
 
 	transition-property: transform, opacity, filter;
 	transition-duration: var(--timing-triple);
-	transition-timing-function: var(--timing-curve);
+	transition-timing-function: var(--timing-curve);*/
 }
-#diagram-business-users-technique.is-inview img {
+/*#diagram-business-users-technique.is-inview img {
 	transform: scale(1) rotate(0deg);
 	filter: blur(0px);
 	opacity: 1;
-}
+}*/
 
 /*Desktop*/
 @media only screen and (min-width: 600px) {
@@ -367,7 +367,7 @@ body {
 }
 
 
-#maslow-pyramid-ux img {
+/*#maslow-pyramid-ux img {
 
 	transform: scale(2.0) rotateX(85deg);
 	transform-origin: top center;
@@ -389,7 +389,7 @@ body {
 	transition-property: transform, opacity, filter;
 	transition-duration: var(--timing-triple);
 	transition-timing-function: var(--timing-curve);
-}
+}*/
 
 
 /*---*/
