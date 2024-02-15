@@ -101,6 +101,20 @@ body {
 }
 
 
+/*Mobile*/
+@media only screen and (max-width: 600px) {
+	.menu.level-1 li{
+		line-height: 6rem;
+	}
+}
+/*Desktop*/
+@media only screen and (min-width: 600px) {
+	.menu.level-1 li{
+		line-height: 8rem;
+	}
+}
+
+
 
 /* Menu underline */
 .menu .underline {
