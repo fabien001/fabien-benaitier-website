@@ -284,6 +284,7 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-end;
+	font-style:italic;
 
 	transform: translateX(-200px);
 	opacity: 0;
@@ -704,6 +705,7 @@ p.rollout.is-inview {
 	font-variation-settings: "wght" 200;
 	font-optical-sizing: auto;
 	color: var(--color-primary);
+	font-style:italic;
 }
 
 .bubble p:after {
@@ -748,7 +750,7 @@ p.rollout.is-inview {
 	}
 
 	.bubble h3 {
-		margin-bottom: -0.66rem;
+		margin-bottom: -0.7rem;
 	}
 }
 
